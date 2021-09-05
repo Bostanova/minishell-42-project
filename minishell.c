@@ -4,7 +4,7 @@ void print_arr(char **arr) {
 	int i = 0;
 	if (arr && arr[i]) {
 		while (arr[i]) {
-			printf("%s\n", arr[i]);
+			printf("args[%d]: %s\n", i, arr[i]);
 			i++;
 		}
 	}
