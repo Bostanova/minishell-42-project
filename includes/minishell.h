@@ -24,7 +24,7 @@ int		g_exit;
 typedef struct s_cmds
 {
 	char			**env;
-	char			**args;		//args[0] - name of command
+	char			**args;		//args[0] - name of command, заканчивается на NULL
 	int				count_args;
 	int				pipe;
 	int				redir[2];	//redir[0] - наличие редиректа, redir[1] - символ редиректа: > < << >>
@@ -37,8 +37,13 @@ char	*rl_gets (void);
 t_cmds	*init_cmd(char **env);
 char 	**get_env(char **envp);
 void	parsing(t_cmds *cmd, char *line);
+void	parse_cmd(t_cmds *cmd, char *line, int *i);
+char	**ft_global_realloc(char **arr, int size);
+char	*add_char(char *str, char c);
 void 	free_arr(char **arr);
 void	ft_error(int err);
 void	free_cmd(t_cmds *cmd);
+
+void print_arr(char **arr); //remove later,  it's for checking
 
 #endif

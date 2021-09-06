@@ -1,8 +1,7 @@
 #include "./includes/minishell.h"
 
 /* Read a string, and return a pointer to it.  Returns NULL on EOF. */
-char	*rl_gets (void)
-{
+char	*rl_gets (void) {
 	char *line;
 	
 	line = (char *)NULL;
@@ -19,8 +18,7 @@ char	*rl_gets (void)
 	return (line);
 }
 
-t_cmds	*init_cmd(char **env)
-{
+t_cmds	*init_cmd(char **env) {
 	t_cmds	*cmd;
 
 	cmd = (t_cmds *)malloc(sizeof(t_cmds));

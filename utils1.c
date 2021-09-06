@@ -1,19 +1,29 @@
 #include "./includes/minishell.h"
 
 void	free_arr(char **arr) {
-	int i = 0;
-
-	if (arr)
+	int i;
+	
+	i = 0;
+	if (arr) {
 		while (arr[i]) {
 			free(arr[i]);
-			i++;	
+			i++;
 		}
-	if (arr)
-		free(arr);
+	}
+	free(arr);
 }
 
 void	free_cmd(t_cmds *cmd) {
-	free_arr(cmd->args);
+	int i;
+
+	i = 0;
+	if (cmd->args) {
+		while (i < cmd->count_args) {
+		free(cmd->args[i]);
+		i++;
+		}
+	free(cmd->args);
+	}
 	if (cmd->infile)
 		free(cmd->infile);
 	if (cmd->outfile)
@@ -21,11 +31,8 @@ void	free_cmd(t_cmds *cmd) {
 	free(cmd);
 }
 
-void	ft_error(int err)
-{
+void	ft_error(int err) {
 	if (err == 1)
 		printf("Error: cannot allocate memory\n");
 	exit(err);
 }
-
-
