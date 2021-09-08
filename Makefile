@@ -1,11 +1,13 @@
 #		gcc -g *.c libft/*.c -lreadline -o minishell
+#		gcc -g -fsanitize=address *.c libft/*.c -lreadline -o minishell
 DIR_HEADER	= ./includes/
 
 SRC			= 	minishell.c \
 				utils0.c \
 				utils1.c \
 				parsing.c \
-				parse_cmd.c
+				parse_cmd.c \
+				parse_quotes.c
 				
 
 OBJS		= $(SRC:.c=.o)
@@ -21,7 +23,7 @@ NORM		= -R CheckForbiddenSourceHeader
 			$(GCC) $(CFLAGS) -I $(DIR_HEADER) -c $< -o $@
 
 $(NAME):	$(OBJS)
-					$(GCC) $(CFLAGS) $(OBJS) -lreadline -o $(NAME) 
+					$(GCC) $(CFLAGS) $(OBJS) -lreadline libft/libft.a -o $(NAME) 
 
 all:		$(NAME)
 
