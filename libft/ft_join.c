@@ -1,5 +1,5 @@
 #include "libft.h"
-
+//
 char	*ft_join(char const *s1, char const *s2)
 {
 	char	*res;
@@ -25,6 +25,6 @@ char	*ft_join(char const *s1, char const *s2)
 		j++;
 	}
 	res[i] = '\0';
-	free((void *)s1);		//добавлено для функции get_path
+	free((void *)s1);		//добавлено
 	return (res);
 }
