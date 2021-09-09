@@ -36,15 +36,10 @@ static char *get_envs_name(char *line, int *i) {
 
 	env = NULL;
 	*i += 1;
-	// if (line[*i] == '\'' || line[*i] == '\"') {
-	// 	env = quote_proccesing(line, i);
-	// }
-	// else {
-		while (line[*i] && !stophere(line[*i])) {
-			env = add_char(env, line[*i]);
-			*i += 1;
-		}
-	// }
+	while (line[*i] && !stophere(line[*i])) {
+		env = add_char(env, line[*i]);
+		*i += 1;
+	}
 	return (env);
 }
 
