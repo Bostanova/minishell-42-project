@@ -14,13 +14,9 @@ int	foo(char c) {
 }
 
 static void	alloc_new_arg(t_cmds *cmd, char *line, int *i) {
-	if (*i == 0) {
+	if (*i == 0 || cmd->count_args == 0) {
 		cmd->args = global_alloc(cmd->args, 1);
 	}
-	// else if ((ft_isspace(line[*i - 1]) && ( ft_isalnum(line[*i]) \
-	// 	|| line[*i] == '$' || line[*i] == '\'' || line[*i] == '\"'))) {
-	// 	cmd->args = global_alloc(cmd->args, (1 + cmd->count_args));
-	// }
 	else if (ft_isspace(line[*i - 1]) && foo(line[*i])) {
 		cmd->args = global_alloc(cmd->args, (1 + cmd->count_args));
 	}
@@ -38,7 +34,7 @@ static void	alloc_new_arg(t_cmds *cmd, char *line, int *i) {
 	}
 }
 
-void	parsing(t_cmds *cmd, char *line) {
+void	parsing(t_cmds *cmd, char *line, char **env) {
 	int *i;
 	
 	i = (int *)malloc(sizeof(int));
@@ -61,12 +57,15 @@ void	parsing(t_cmds *cmd, char *line) {
 			parse_env(cmd, line, i, 0);
 		}
 		else if (line[*i] == '|') {
+			cmd->pipe = 1;
+			cmd->next = init_cmd(env);
+			cmd = cmd->next;
 			*i += 1;
 		}
 		else {
 			parse_cmd(cmd, line, i);
 		}
-		if (!line[*i] || is_new_arg(line[*i])) {
+		if ((!line[*i] || is_new_arg(line[*i])) && cmd->args) {
 			if (cmd->args[cmd->count_args])
 				cmd->count_args += 1;
 		}

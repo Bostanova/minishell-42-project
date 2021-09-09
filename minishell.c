@@ -11,19 +11,26 @@ void print_arr(char **arr) {
 }
 //for checking cmd structure, remove later
 void print_cmd(t_cmds *cmd) {
-	int i = 0;
-	if (cmd->args) {
-		while (cmd->args[i]) {
-			printf("args[%d] = %s\n", i, cmd->args[i]);
-			i++;
+	int i;
+	t_cmds *tmp;
+	while (cmd != NULL) {
+		tmp = cmd;
+		i = 0;
+		if (cmd->args) {
+			while (cmd->args[i]) {
+				printf("args[%d] = %s\n", i, cmd->args[i]);
+				i++;
+			}
 		}
+		printf("cmd->count_args:%d\n", cmd->count_args);
+		printf("cmd->redir[0]:	%d\n", cmd->redir[0]);
+		printf("cmd->redir[1]:	%d\n", cmd->redir[1]);
+		printf("cmd->pipe:	%d\n", cmd->pipe);
+		printf("cmd->infile:	%s\n", cmd->infile);
+		printf("cmd->outfile:	%s\n", cmd->outfile);
+		cmd = tmp->next;
 	}
-	printf("cmd->count_args:%d\n", cmd->count_args);
-	printf("cmd->redir[0]:	%d\n", cmd->redir[0]);
-	printf("cmd->redir[1]:	%d\n", cmd->redir[1]);
-	printf("cmd->pipe:	%d\n", cmd->pipe);
-	printf("cmd->infile:	%s\n", cmd->infile);
-	printf("cmd->outfile:	%s\n", cmd->outfile);
+	
 }
 
 int	main(int argc, char **argv, char **envp) {
@@ -33,12 +40,12 @@ int	main(int argc, char **argv, char **envp) {
 
 	g_exit = 0;
 	env = get_env(envp);
-	for (int k = 0; k < 90; k++)  // change to "while (TRUE)"
+	for (int k = 0; k < 5; k++)  // change to "while (TRUE)"
 	{
 		cmd = init_cmd(env);
 		line = rl_gets();
-		parsing(cmd, line);
-		printf("%s\n", line);
+		parsing(cmd, line, env);
+		printf("%s\n", line);	//remove later
 		print_cmd(cmd);			//remove later
 		free(line);
 		free_cmd(cmd);

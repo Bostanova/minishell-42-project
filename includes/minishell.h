@@ -37,7 +37,7 @@ typedef struct s_cmds
 char	*rl_gets (void);
 t_cmds	*init_cmd(char **env);
 char 	**get_env(char **envp);
-void	parsing(t_cmds *cmd, char *line);
+void	parsing(t_cmds *cmd, char *line, char **env);
 char	**global_alloc(char **arr, int size);
 char	*add_char(char *str, char c);
 int		is_new_arg(char c);

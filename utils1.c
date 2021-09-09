@@ -14,21 +14,28 @@ void	free_arr(char **arr) {
 }
 
 void	free_cmd(t_cmds *cmd) {
-	int i;
+	int 	i;
+	t_cmds *tmp;
 
-	i = 0;
-	if (cmd->args) {
-		while (i < cmd->count_args) {
-		free(cmd->args[i]);
-		i++;
+	while (cmd) {
+		tmp = cmd;
+		i = 0;
+		if (cmd->args) {
+			while (i < cmd->count_args) {
+			free(cmd->args[i]);
+			i++;
+			}
+		free(cmd->args);
 		}
-	free(cmd->args);
+		if (cmd->infile)
+			free(cmd->infile);
+		if (cmd->outfile)
+			free(cmd->outfile);
+		free(cmd);
+		cmd = tmp->next;
 	}
-	if (cmd->infile)
-		free(cmd->infile);
-	if (cmd->outfile)
-		free(cmd->outfile);
-	free(cmd);
+
+	
 }
 
 void	ft_error(int err) {
