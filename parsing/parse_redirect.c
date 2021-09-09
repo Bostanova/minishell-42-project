@@ -1,4 +1,4 @@
-#include "./includes/minishell.h"
+#include "../includes/minishell.h"
 
 static int stoping(char c) {
 	if (c == '<' || c == '>' || c == '|' || ft_isspace(c)) {

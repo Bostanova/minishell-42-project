@@ -1,4 +1,4 @@
-#include "./includes/minishell.h"
+#include "../includes/minishell.h"
 
 /* Read a string, and return a pointer to it.  Returns NULL on EOF. */
 char	*rl_gets (void) {

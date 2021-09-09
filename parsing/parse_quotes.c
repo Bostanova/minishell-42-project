@@ -1,4 +1,4 @@
-#include "./includes/minishell.h"
+#include "../includes/minishell.h"
 
 void	parse_single_quotes(t_cmds *cmd, char *line, int *i, int redir) {
 	*i += 1;

@@ -1,4 +1,4 @@
-#include "./includes/minishell.h"
+#include "../includes/minishell.h"
 
 int	is_new_arg(char c) {
 	if (c == '<' || c == '>' || c == '|' || ft_isspace(c))

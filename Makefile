@@ -1,15 +1,15 @@
-#		gcc -g *.c libft/*.c -lreadline -o minishell
+#		gcc -g parsing/*.c  *.c libft/*.c -lreadline -o minishell
 #		gcc -g -fsanitize=address *.c libft/*.c -lreadline -o minishell
 DIR_HEADER	= ./includes/
 
 SRC			= 	minishell.c \
-				utils0.c \
-				utils1.c \
-				parsing.c \
-				parse_cmd.c \
-				parse_quotes.c \
-				parse_env.c \
-				parse_redirect.c
+				parsing/utils0.c \
+				parsing/utils1.c \
+				parsing/parsing.c \
+				parsing/parse_cmd.c \
+				parsing/parse_quotes.c \
+				parsing/parse_env.c \
+				parsing/parse_redirect.c
 				
 
 OBJS		= $(SRC:.c=.o)
