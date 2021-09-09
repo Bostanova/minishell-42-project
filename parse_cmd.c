@@ -1,9 +1,7 @@
 #include "./includes/minishell.h"
 
-int	isinterpret(char c) {
-	if (c == '\'' || c == '\"' || c == '<' \
-		|| c == '>' || c == '$' || c == '|' \
-		|| ft_isspace(c))
+int	is_new_arg(char c) {
+	if (c == '<' || c == '>' || c == '|' || ft_isspace(c))
 		return (1);
 	else
 		return (0);
@@ -45,16 +43,23 @@ char	*add_char(char *str, char c) {
 		}
 	res[j] = c;
 	res[j + 1] = '\0';
-	if (str) 
+	if (str)
 		free(str);
 	return (res);
 }
 
+static int	isinterpret(char c) {
+	if (c == '\'' || c == '\"' || c == '<' \
+		|| c == '>' || c == '$' || c == '|' \
+		|| ft_isspace(c))
+		return (1);
+	else
+		return (0);
+}
+
 void	parse_cmd(t_cmds *cmd, char *line, int *i) {
-	cmd->args = global_alloc(cmd->args, (1 + cmd->count_args));
 	while(!isinterpret(line[*i]) && line[*i]) {
 		cmd->args[cmd->count_args] = add_char(cmd->args[cmd->count_args], line[*i]);
 		*i += 1;
 	}
-	cmd->count_args += 1;
 }

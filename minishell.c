@@ -1,5 +1,5 @@
 #include "./includes/minishell.h"
-//check cmd structure
+//for checking cmd structure
 void print_arr(char **arr) {
 	int i = 0;
 	if (arr && arr[i]) {
@@ -31,18 +31,18 @@ int	main(int argc, char **argv, char **envp) {
 	t_cmds	*cmd;
 
 	g_exit = 0;
-	env = get_env(envp); 	//копия env (1)
-	for (int i = 0; i < 2; i++)  // change to "while (TRUE)"
+	env = get_env(envp); 	//копия env
+	for (int i = 0; i < 5; i++)  // change to "while (TRUE)"
 	{
 		cmd = init_cmd(env);
-		line = rl_gets();		// (2)
+		line = rl_gets();
 		parsing(cmd, line);		//cmd.args заканчивается на NULL
 		print_cmd(cmd);
-		free(line);				// (2)
+		free(line);
 		free_cmd(cmd);
 	}
-	clear_history();			// (2)
-	free_arr(env);				// (1)
+	clear_history();
+	free_arr(env);
 
 	// system("leaks minishell");
 	// export MallocStackLogging=1  - in bash

@@ -7,7 +7,8 @@ SRC			= 	minishell.c \
 				utils1.c \
 				parsing.c \
 				parse_cmd.c \
-				parse_quotes.c
+				parse_quotes.c \
+				parse_env.c 
 				
 
 OBJS		= $(SRC:.c=.o)
