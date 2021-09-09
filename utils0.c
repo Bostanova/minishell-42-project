@@ -5,15 +5,13 @@ char	*rl_gets (void) {
 	char *line;
 	
 	line = (char *)NULL;
-  /* If the buffer has already been allocated, return the memory
-     to the free pool. */
-	if (line)
+  	if (line)
 	{
 		free (line);
 		line = (char *)NULL;
 	}
-	line = readline (PROMPT); /* Get a line from the user. */
-	if (line && *line) /* If the line has any text in it, save it on the history. */
+	line = readline (PROMPT);
+	if (line && *line) 
 		add_history (line);
 	return (line);
 }

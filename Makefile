@@ -8,7 +8,8 @@ SRC			= 	minishell.c \
 				parsing.c \
 				parse_cmd.c \
 				parse_quotes.c \
-				parse_env.c 
+				parse_env.c \
+				parse_redirect.c
 				
 
 OBJS		= $(SRC:.c=.o)

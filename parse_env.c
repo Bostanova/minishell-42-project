@@ -36,15 +36,15 @@ static char *get_envs_name(char *line, int *i) {
 
 	env = NULL;
 	*i += 1;
-	if (line[*i] == '\'' || line[*i] == '\"') {
-		env = quote_proccesing(line, i);
-	}
-	else {
+	// if (line[*i] == '\'' || line[*i] == '\"') {
+	// 	env = quote_proccesing(line, i);
+	// }
+	// else {
 		while (line[*i] && !stophere(line[*i])) {
 			env = add_char(env, line[*i]);
 			*i += 1;
 		}
-	}
+	// }
 	return (env);
 }
 
@@ -76,7 +76,7 @@ static char	*add_str(char *s1, char *s2, int start) {
 	return (res);
 }
 
-void	parse_env(t_cmds *cmd, char *line, int *i) {
+void	parse_env(t_cmds *cmd, char *line, int *i, int redir) {
 	char *env;
 	int j;
 	int len;
@@ -85,9 +85,17 @@ void	parse_env(t_cmds *cmd, char *line, int *i) {
 	j = 0;
 	len = ft_strlen(env);
 	while (cmd->env[j]) {
-		if (!ft_strncmp(cmd->env[j], env, len)) {
+		if (!ft_strncmp(cmd->env[j], env, len) && cmd->env[j][len ] == '=') {
 			len += 1;
-			cmd->args[cmd->count_args] = add_str(cmd->args[cmd->count_args], cmd->env[j], len);
+			if (redir == LESS || redir == LESSLESS) {
+				cmd->infile = add_str(cmd->infile, cmd->env[j], len);
+			}
+			else if (redir == GREAT || redir == GREATGREAT) {
+				cmd->outfile = add_str(cmd->outfile, cmd->env[j], len);
+			}
+			else {
+				cmd->args[cmd->count_args] = add_str(cmd->args[cmd->count_args], cmd->env[j], len);
+			}
 		}
 		j += 1;
 	}

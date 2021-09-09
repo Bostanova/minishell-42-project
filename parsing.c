@@ -1,13 +1,40 @@
 #include "./includes/minishell.h"
 
+int	foo(char c) {
+	if ((c >= '!' && c <= ';') || c == '=') {
+		return (1);
+	}
+	else if (c >= '?' && c <= '{') {
+			return (1);
+	}
+	else if (c >= '}' && c <= '~') {
+			return (1);
+	}
+	return (0);
+}
+
 static void	alloc_new_arg(t_cmds *cmd, char *line, int *i) {
 	if (*i == 0) {
 		cmd->args = global_alloc(cmd->args, 1);
 	}
-	else if (line[*i] == '<' || line[*i] == '>' \
-		|| (ft_isspace(line[*i - 1]) && ( ft_isalnum(line[*i]) \
-		|| line[*i] == '$' || line[*i] == '\'' || line[*i] == '\"'))) {
+	// else if ((ft_isspace(line[*i - 1]) && ( ft_isalnum(line[*i]) \
+	// 	|| line[*i] == '$' || line[*i] == '\'' || line[*i] == '\"'))) {
+	// 	cmd->args = global_alloc(cmd->args, (1 + cmd->count_args));
+	// }
+	else if (ft_isspace(line[*i - 1]) && foo(line[*i])) {
 		cmd->args = global_alloc(cmd->args, (1 + cmd->count_args));
+	}
+	else if (line[*i] == '<') {
+		if (cmd->infile) {
+			free(cmd->infile);
+			cmd->infile = NULL;
+		}
+	}
+	else if (line[*i] == '>') {
+		if (cmd->outfile) {
+			free(cmd->outfile);
+			cmd->outfile = NULL;
+		}
 	}
 }
 
@@ -22,19 +49,18 @@ void	parsing(t_cmds *cmd, char *line) {
 			*i += 1;
 		}
 		else if (line[*i] == '\'') {
-			parse_single_quotes(cmd, line, i);
+			parse_single_quotes(cmd, line, i, 0);
 		}
 		else if (line[*i] == '\"') {
-			parse_double_quotes(cmd, line, i);
+			parse_double_quotes(cmd, line, i, 0);
 		}
 		else if (line[*i] == '<' || line[*i] == '>') {
-			*i + = 1;
-		}
+			parse_redirect(cmd, line, i);
+			}
 		else if (line[*i] == '$') {
-			parse_env(cmd, line, i);
+			parse_env(cmd, line, i, 0);
 		}
 		else if (line[*i] == '|') {
-			// printf("5\n");
 			*i += 1;
 		}
 		else {
