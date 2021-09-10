@@ -8,7 +8,7 @@
 char	*ft_strdup(const char *s1)
 {
 	char	*res;
-
+	
 	res = (char *)ft_calloc(ft_strlen(s1) + 1, sizeof(char));
 	if (!res)
 		return (NULL);

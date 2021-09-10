@@ -1,5 +1,5 @@
 #include "./includes/minishell.h"
-//check cmd structure
+//for checking cmd structure, remove later
 void print_arr(char **arr) {
 	int i = 0;
 	if (arr && arr[i]) {
@@ -9,37 +9,49 @@ void print_arr(char **arr) {
 		}
 	}
 }
-
+//for checking cmd structure, remove later
 void print_cmd(t_cmds *cmd) {
-	print_arr(cmd->args);
-	printf("cmd->count_args:%d\n", cmd->count_args);
-	printf("cmd->redir[0]:	%d\n", cmd->redir[0]);
-	printf("cmd->redir[1]:	%d\n", cmd->redir[1]);
-	printf("cmd->pipe:	%d\n", cmd->pipe);
-	printf("cmd->infile:	%s\n", cmd->infile);
-	printf("cmd->outfile:	%s\n", cmd->outfile);
+	int i;
+	t_cmds *tmp;
+	while (cmd != NULL) {
+		tmp = cmd;
+		i = 0;
+		if (cmd->args) {
+			while (cmd->args[i]) {
+				printf("args[%d] = %s\n", i, cmd->args[i]);
+				i++;
+			}
+		}
+		printf("cmd->count_args:%d\n", cmd->count_args);
+		printf("cmd->redir[0]:	%d\n", cmd->redir[0]);
+		printf("cmd->redir[1]:	%d\n", cmd->redir[1]);
+		printf("cmd->pipe:	%d\n", cmd->pipe);
+		printf("cmd->infile:	%s\n", cmd->infile);
+		printf("cmd->outfile:	%s\n", cmd->outfile);
+		cmd = tmp->next;
+	}
+	
 }
 
-int	main(int argc, char **argv, char **envp)
-{
+int	main(int argc, char **argv, char **envp) {
 	char	*line;
 	char	**env;
 	t_cmds	*cmd;
 
 	g_exit = 0;
-	env = get_env(envp); 	//копия env (1)
-	// while (TRUE)
-	for (int i = 0; i < 2; i++)
+	env = get_env(envp);
+	for (int k = 0; k < 5; k++)  // change to "while (TRUE)"
 	{
 		cmd = init_cmd(env);
-		line = rl_gets();		// (2)
-		parsing(cmd, line);
-		print_cmd(cmd);
-		free(line);				// (2)
+		line = rl_gets();
+		parsing(cmd, line, env);
+		printf("%s\n", line);	//remove later
+		print_cmd(cmd);			//remove later
+		free(line);
 		free_cmd(cmd);
 	}
-	clear_history();			// (2)
-	free_arr(env);				// (1)
+	clear_history();
+	free_arr(env);
 
 	// system("leaks minishell");
 	// export MallocStackLogging=1  - in bash

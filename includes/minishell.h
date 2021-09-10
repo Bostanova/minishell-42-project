@@ -18,16 +18,17 @@
 #define LESS 2
 #define GREATGREAT 3
 #define LESSLESS 4
+#define SYNTAXERROR -1
 
 int		g_exit;
 
 typedef struct s_cmds
 {
 	char			**env;
-	char			**args;		//args[0] - name of command
+	char			**args;		//args[0] - name of command, заканчивается на NULL
 	int				count_args;
 	int				pipe;
-	int				redir[2];	//redir[0] - наличие редиректа, redir[1] - символ редиректа: > < << >>
+	int				redir[2];	//redir[0] - in, redir[1] - out
 	char			*infile;
 	char			*outfile;
 	struct s_cmds	*next;
@@ -36,9 +37,19 @@ typedef struct s_cmds
 char	*rl_gets (void);
 t_cmds	*init_cmd(char **env);
 char 	**get_env(char **envp);
-void	parsing(t_cmds *cmd, char *line);
+void	parsing(t_cmds *cmd, char *line, char **env);
+char	**global_alloc(char **arr, int size);
+char	*add_char(char *str, char c);
+int		is_new_arg(char c);
+void	parse_cmd(t_cmds *cmd, char *line, int *i);
+void	parse_single_quotes(t_cmds *cmd, char *line, int *i, int redir);
+void	parse_double_quotes(t_cmds *cmd, char *line, int *i, int redir);
+void	parse_env(t_cmds *cmd, char *line, int *i, int redir);
+void	parse_redirect(t_cmds *cmd, char *line, int *i);
 void 	free_arr(char **arr);
 void	ft_error(int err);
 void	free_cmd(t_cmds *cmd);
+
+void print_arr(char **arr); //remove later,  it's for checking
 
 #endif

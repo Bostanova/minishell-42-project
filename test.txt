@@ -1,0 +1,105 @@
+./a.out
+../a.out
+./efwufkk
+/bin/ls
+/bin/ls -lrt
+ls qwerty
+/binn/ls
+echo abcd
+echo a"bc"d
+echo a'bcd'e
+echo 'abc
+echo $HOME
+echo '$HOME'
+echo "$HOME"
+echo $HO"ME"
+echo $"HOME"
+echo "'$HOME'"
+echo '"$HOME"'
+echo -n lalalal
+echo -n
+echo -nABC
+echo $ a
+echo "$     a"
+echo 
+Echo ""
+Echo ''
+echo "\\\\$HOME"
+echo "\\\\\$HOME"
+echo "\\$HOME \\\$HOME \\\\$HOME $HOME $HOME $HOME"
+pwd
+pwd lalala
+env
+exit
+exit 0
+exit 1
+exit -1
+exit 999999
+exit -999999
+exit -abc
+exit abc
+exit -18abc
+exit 12; ls
+exit 12; exit 123
+exit 12; exit -a123
+exit 1 2 3 a
+exit -
+export a=10
+export 111=222
+export 1abc=123
+export
+ export _abc=10
+export "111=222"
+Export "111"="222"
+export 'a'='b'
+export a=6 b=8 c=9
+export a=5 a=7 a=8
+unset a1
+unset a1=10
+unset 1_aa
+unset a c
+unset a c=10
+Unset ""
+unset "" a
+unset a ""
+cd ../../..
+cd
+cd $var
+cd var1 var2 var...
+cd "minishell          "
+ls <> abc
+sort < abc
+ls >> abc
+ls><abc
+cat >file
+ls | grep t
+ pwd; ls | grep t
+ls | grep t; pwd
+sort < abc | grep t
+cat abc | grep t > pqr
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,36 +1,40 @@
+#		gcc -g parsing/*.c  *.c libft/*.c -lreadline -o minishell
+#		gcc -g -fsanitize=address *.c libft/*.c -lreadline -o minishell
 DIR_HEADER	= ./includes/
 
 SRC			= 	minishell.c \
-				utils0.c \
-				utils1.c \
-				parsing.c 
+				parsing/utils0.c \
+				parsing/utils1.c \
+				parsing/parsing.c \
+				parsing/parse_cmd.c \
+				parsing/parse_quotes.c \
+				parsing/parse_env.c \
+				parsing/parse_redirect.c
 				
 
 OBJS		= $(SRC:.c=.o)
 
 NAME		= minishell
 
-RDLN_FLAG = -L/Users/eerika/.brew/Cellar/readline/8.1/lib/ -I/Users/eerika/.brew/Cellar/readline/8.1/include
-
 GCC			= gcc -g
-RM			= rm -f
 CFLAGS		= -Wall -Wextra #-Werror 
+
 NORM		= -R CheckForbiddenSourceHeader
 
 %.o: %.c
 			$(GCC) $(CFLAGS) -I $(DIR_HEADER) -c $< -o $@
 
 $(NAME):	$(OBJS)
-					$(GCC) $(CFLAGS) $(OBJS) -o $(NAME) -lreadline -L/Users/${USER}/.brew/Cellar/readline/8.1/lib/ -I/Users/${USER}/.brew/Cellar/readline/8.1/include-LLibft/ -LLibft/ -lft -L.
+					$(GCC) $(CFLAGS) $(OBJS) -lreadline libft/libft.a -o $(NAME) 
 
 all:		$(NAME)
 
 clean:
-				$(RM) $(OBJS)
+				rm -f $(OBJS)
 
 fclean:		clean
 				make clean
-				$(RM) $(NAME)
+				rm -f $(NAME)
 
 re:				fclean all
 
