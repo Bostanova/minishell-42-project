@@ -1,54 +1,55 @@
-NAME			= minishell
-CC				= gcc
-RM				= rm -rf
+NAME			:= 	minishell
 
-LEACS			= #-fsanitize=address
-CFLAGS			= $(LEACS) -lreadline #-Wall -Wextra #-Werror -O2 -g
-NORM			= -R CheckForbiddenSourceHeader
+CC				:= 	gcc
+RM				:= 	rm -rf
 
-LIBFT_DIR		= libft/
-LIBFT			= $(LIBFT_DIR)libft.a
+OFLAGS			:=	-O2 -g#-fsanitize=address
+CFLAGS			:= 	$(OFLAGS) -Wall #-Wextra #-Werror
+NORM			:= 	-R CheckForbiddenSourceHeader
 
-INCLUDES		= includes/
-HEADER			= $(wildcard $(INCLUDES)*.h)
+LIBFT_DIR		:= 	libft/
+LIBFT			:= 	$(LIBFT_DIR)libft.a
 
-SRC_DIR			= parsing/
-SRCS			= minishell.c	$(SRC_DIR)utils0.c \
-								$(SRC_DIR)utils1.c \
-								$(SRC_DIR)parsing.c \
-								$(SRC_DIR)parse_cmd.c \
-								$(SRC_DIR)parse_quotes.c \
-								$(SRC_DIR)parse_env.c \
-								$(SRC_DIR)parse_redirect.c
+INCLUDES		:= 	includes/
+HEADER			:= 	$(INCLUDES)*.h
 
-OBJ_DIR			= .objs/
-OBJS			= $(addprefix $(OBJ_DIR), $(notdir $(SRCS:%.c=%.o)))
+SRCS_DIR		:= 	parsing/
+SRCS			:= 	$(SRCS_DIR)minishell.c\
+					$(SRCS_DIR)utils0.c \
+					$(SRCS_DIR)utils1.c \
+					$(SRCS_DIR)parsing.c \
+					$(SRCS_DIR)parse_cmd.c \
+					$(SRCS_DIR)parse_quotes.c \
+					$(SRCS_DIR)parse_env.c \
+					$(SRCS_DIR)parse_redirect.c\
 
-all:			libft_make $(NAME)
+OBJS_DIR		:=	.objs/
+OBJS			:=	$(addprefix $(OBJS_DIR), $(notdir $(SRCS:%.c=%.o)))
 
-$(NAME):		$(OBJS) Makefile 
-				$(CC) $(CFLAGS)  $(LIBFT) $(OBJS) -o $@
+all:				libft_make $(NAME)
 
-$(OBJ_DIR)%.o:	$(SRCS) $(LIBFT) $(HEADER) | $(OBJ_DIR)
-				$(CC) -c $(CFLAGS) -I$(HEADER) $< -o $@
+$(NAME):			$(OBJS) $(LIBFT) Makefile
+					$(CC) $(CFLAGS) -lreadline $(LIBFT) $(OBJS) -o $@
 
-$(OBJ_DIR):
-				mkdir -p $@
+$(OBJS_DIR)%.o:		$(SRCS_DIR)%.c $(HEADER) | $(OBJS_DIR)
+					$(CC) $(CFLAGS) -I $(INCLUDES) -c $< -o $@
+
+$(OBJS_DIR):
+					mkdir -p $@
 
 clean:
-				$(RM) $(OBJS)
+					$(RM) $(OBJS_DIR)
 
-fclean:			clean
-				$(RM) $(NAME)
-				$(RM) $(OBJ_DIR)
-				-make fclean -C $(LIBFT_DIR)
+fclean:				clean
+					$(RM) $(NAME)
+					make fclean -C $(LIBFT_DIR)
 
-re:				fclean all
+re:					fclean all
 
 libft_make:
-				-make -C $(LIBFT_DIR)
+					make -C $(LIBFT_DIR)
 
 norme:
-				norminette $(NORM) $(SRCS)*.c $(INCLUDES)*.h
+					norminette $(NORM) $(SRCS)*.c $(INCLUDES)*.h
 
-.PHONY:			all clean fclean re libft_make
+.PHONY:				all clean fclean re libft_make
