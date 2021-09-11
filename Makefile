@@ -1,44 +1,54 @@
-#		gcc -g parsing/*.c  *.c libft/*.c -lreadline -o minishell
-#		gcc -g -fsanitize=address *.c libft/*.c -lreadline -o minishell
-DIR_HEADER	= ./includes/
+NAME			= minishell
+CC				= gcc
+RM				= rm -rf
 
-SRC			= 	minishell.c \
-				parsing/utils0.c \
-				parsing/utils1.c \
-				parsing/parsing.c \
-				parsing/parse_cmd.c \
-				parsing/parse_quotes.c \
-				parsing/parse_env.c \
-				parsing/parse_redirect.c
-				
+LEACS			= #-fsanitize=address
+CFLAGS			= $(LEACS) -lreadline #-Wall -Wextra #-Werror -O2 -g
+NORM			= -R CheckForbiddenSourceHeader
 
-OBJS		= $(SRC:.c=.o)
+LIBFT_DIR		= libft/
+LIBFT			= $(LIBFT_DIR)libft.a
 
-NAME		= minishell
+INCLUDES		= includes/
+HEADER			= $(wildcard $(INCLUDES)*.h)
 
-GCC			= gcc -g
-CFLAGS		= -Wall -Wextra #-Werror 
+SRC_DIR			= parsing/
+SRCS			= minishell.c	$(SRC_DIR)utils0.c \
+								$(SRC_DIR)utils1.c \
+								$(SRC_DIR)parsing.c \
+								$(SRC_DIR)parse_cmd.c \
+								$(SRC_DIR)parse_quotes.c \
+								$(SRC_DIR)parse_env.c \
+								$(SRC_DIR)parse_redirect.c
 
-NORM		= -R CheckForbiddenSourceHeader
+OBJ_DIR			= .objs/
+OBJS			= $(addprefix $(OBJ_DIR), $(notdir $(SRCS:%.c=%.o)))
 
-%.o: %.c
-			$(GCC) $(CFLAGS) -I $(DIR_HEADER) -c $< -o $@
+all:			libft_make $(NAME)
 
-$(NAME):	$(OBJS)
-					$(GCC) $(CFLAGS) $(OBJS) -lreadline libft/libft.a -o $(NAME) 
+$(NAME):		$(OBJS) Makefile 
+				$(CC) $(CFLAGS)  $(LIBFT) $(OBJS) -o $@
 
-all:		$(NAME)
+$(OBJ_DIR)%.o:	$(SRCS) $(LIBFT) $(HEADER) | $(OBJ_DIR)
+				$(CC) -c $(CFLAGS) -I$(HEADER) $< -o $@
+
+$(OBJ_DIR):
+				mkdir -p $@
 
 clean:
-				rm -f $(OBJS)
+				$(RM) $(OBJS)
 
-fclean:		clean
-				make clean
-				rm -f $(NAME)
+fclean:			clean
+				$(RM) $(NAME)
+				$(RM) $(OBJ_DIR)
+				-make fclean -C $(LIBFT_DIR)
 
 re:				fclean all
 
-norme:
-			norminette $(NORM) $(SRC)*.c $(DIR_HEADER)*.h
+libft_make:
+				-make -C $(LIBFT_DIR)
 
-.PHONY:		all clean fclean re
+norme:
+				norminette $(NORM) $(SRCS)*.c $(INCLUDES)*.h
+
+.PHONY:			all clean fclean re libft_make
