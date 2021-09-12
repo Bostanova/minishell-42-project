@@ -6,13 +6,13 @@
 #include <string.h>
 #include <stdio.h>
 #include <fcntl.h>
-#include <errno.h>				//strerror, etc
- #include <sys/stat.h> 			//for stat
+#include <errno.h>
+ #include <sys/stat.h>
 #include <readline/readline.h>
 #include <readline/history.h>
 #include "../libft/libft.h"
 
-#define PROMPT "bigSmile> "
+#define PROMPT "minishell$ "
 #define TRUE 1
 #define GREAT 1
 #define LESS 2
@@ -22,9 +22,16 @@
 
 int		g_exit;
 
+typedef struct	s_env
+{
+	char	*name;
+	char	*data;
+	struct s_env *next;
+}	t_env;
+
 typedef struct s_cmds
 {
-	char			**env;
+	t_env			*env;
 	char			**args;		//args[0] - name of command, заканчивается на NULL
 	int				count_args;
 	int				pipe;
@@ -35,9 +42,9 @@ typedef struct s_cmds
 }	t_cmds;
 
 char	*rl_gets (void);
-t_cmds	*init_cmd(char **env);
-char 	**get_env(char **envp);
-void	parsing(t_cmds *cmd, char *line, char **env);
+t_cmds	*init_cmd(t_env *env);
+t_env	*get_array_of_env(char **envp);
+void	parsing(t_cmds *cmd, char *line, t_env *env);
 char	**global_alloc(char **arr, int size);
 char	*add_char(char *str, char c);
 int		is_new_arg(char c);
@@ -49,6 +56,14 @@ void	parse_redirect(t_cmds *cmd, char *line, int *i);
 void 	free_arr(char **arr);
 void	ft_error(int err);
 void	free_cmd(t_cmds *cmd);
+void	pwd_cmd(void);
+void	env_cmd(t_cmds *cmd);
+void	cd_cmd(t_cmds *cmd, t_env *env);
+void	error_builtin_cd(char *err);
+void	echo_cmd(t_cmds *cmd);
+void	export_cmd(t_cmds *cmd, t_env *env);
+void	free_env(t_env *env);
+t_env 	*addelem(t_env *lst, char *name, char *data);
 
 void print_arr(char **arr); //remove later,  it's for checking
 

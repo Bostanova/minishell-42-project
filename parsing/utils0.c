@@ -16,7 +16,7 @@ char	*rl_gets (void) {
 	return (line);
 }
 
-t_cmds	*init_cmd(char **env) {
+t_cmds	*init_cmd(t_env *env) {
 	t_cmds	*cmd;
 
 	cmd = (t_cmds *)malloc(sizeof(t_cmds));
@@ -34,23 +34,41 @@ t_cmds	*init_cmd(char **env) {
 	return (cmd);
 }
 
-char	**get_env(char **envp) {
-	char	**res;
+t_env *addelem(t_env *lst, char *name, char *data)
+{
+	t_env	*new_node;
+
+	new_node = (t_env *)malloc(sizeof(t_env));
+	while(lst && lst->next)
+		 lst = lst->next;
+	lst->next = new_node;
+	new_node->name = ft_strdup(name);
+	new_node->data = ft_strdup(data);
+	new_node->next = NULL;
+	return(new_node);
+}
+
+t_env	*get_array_of_env(char **envp) {
+	t_env *res;
+	t_env *head;
+	char **tmp;
 	int		i;
 
 	i = 0;
+	res = (t_env *)malloc(sizeof(t_env));
+	tmp = ft_split(envp[i], '=');
+	res->name = ft_strdup(tmp[0]);
+	res->data = ft_strdup(tmp[1]);
+	res->next = NULL;
+	head = res;
+	free_arr(tmp);
+	i = 1;
 	while (envp[i]) {
+		tmp = ft_split(envp[i], '=');
+		addelem(res, tmp[0], tmp[1]);
 		i++;
+		free_arr(tmp);
 	}
-	if (!(res = (char **)malloc(sizeof(char *) * (i + 2)))) {
-		exit(1);
-	}
-	i = 0;
-	while (envp[i]) {
-		res[i] = ft_strdup(envp[i]);
-		i++;
-	}
-	res[i] = NULL;
+	res = head;
 	return (res);
 }
-

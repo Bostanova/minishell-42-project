@@ -1,15 +1,10 @@
-// done
-
 #include "../includes/minishell.h"
 
-void	env_cmd(char **g_envp)
+void	env_cmd(t_cmds *cmd)
 {
-	int	i;
-
-	i = 0;
-	while (g_envp[i])
+	while (cmd->env)
 	{
-		printf("%s\n", g_envp[i]);
-		i++;
+		printf("%s=%s\n", cmd->env->name, cmd->env->data);
+		cmd->env = cmd->env->next;
 	}
 }

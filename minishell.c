@@ -30,28 +30,55 @@ void print_cmd(t_cmds *cmd) {
 		printf("cmd->outfile:	%s\n", cmd->outfile);
 		cmd = tmp->next;
 	}
-	
+}
+
+void print_lst(t_env *env) {
+	t_env *head = env;
+
+	while (env) {
+		printf("%s=%s\n", env->name, env->data);
+		env = env->next;
+	}
 }
 
 int	main(int argc, char **argv, char **envp) {
 	char	*line;
-	char	**env;
+	t_env	*env;
 	t_cmds	*cmd;
 
 	g_exit = 0;
-	env = get_env(envp);
+	env = get_array_of_env(envp);
 	for (int k = 0; k < 5; k++)  // change to "while (TRUE)"
 	{
 		cmd = init_cmd(env);
 		line = rl_gets();
 		parsing(cmd, line, env);
+		
 		printf("%s\n", line);	//remove later
 		print_cmd(cmd);			//remove later
+		if (cmd->args) {
+			if (!ft_strcmp(cmd->args[0], "cd"))
+				cd_cmd(cmd, env);	
+			else if (!ft_strcmp(cmd->args[0], "pwd"))
+				pwd_cmd();
+			else if (!ft_strcmp(cmd->args[0], "env"))
+				env_cmd(cmd);
+			else if (!ft_strcmp(cmd->args[0], "echo"))
+				echo_cmd(cmd);
+			// else if (!ft_strcmp(cmd->args[0], "exit"))
+			// 	exit_cmd(cmd);
+			// else if (!ft_strcmp(cmd->args[0], "unset"))
+			// 	unset_cmd(cmd);
+			else if (!ft_strcmp(cmd->args[0], "export"))
+				export_cmd(cmd, env);
+		}
+
 		free(line);
 		free_cmd(cmd);
 	}
 	clear_history();
-	free_arr(env);
+	free_env(env);
+
 
 	// system("leaks minishell");
 	// export MallocStackLogging=1  - in bash

@@ -79,20 +79,19 @@ void	parse_env(t_cmds *cmd, char *line, int *i, int redir) {
 	env = get_envs_name(line, i);
 	j = 0;
 	len = ft_strlen(env);
-	while (cmd->env[j]) {
-		if (!ft_strncmp(cmd->env[j], env, len) && cmd->env[j][len ] == '=') {
-			len += 1;
+	while (cmd->env) {
+		if (!(ft_strcmp(cmd->env->name, env))) {
 			if (redir == LESS || redir == LESSLESS) {
-				cmd->infile = add_str(cmd->infile, cmd->env[j], len);
+				cmd->infile = add_str(cmd->infile, cmd->env->data, len);
 			}
 			else if (redir == GREAT || redir == GREATGREAT) {
-				cmd->outfile = add_str(cmd->outfile, cmd->env[j], len);
+				cmd->outfile = add_str(cmd->outfile, cmd->env->data, len);
 			}
 			else {
-				cmd->args[cmd->count_args] = add_str(cmd->args[cmd->count_args], cmd->env[j], len);
+				cmd->args[cmd->count_args] = add_str(cmd->args[cmd->count_args], cmd->env->data, len);
 			}
 		}
-		j += 1;
+		cmd->env = cmd->env->next;
 	}
 	if (env)
 		free(env);
