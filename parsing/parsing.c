@@ -14,7 +14,7 @@ int	foo(char c) {
 }
 
 static void	alloc_new_arg(t_cmds *cmd, char *line, int *i) {
-	if (*i == 0 || cmd->count_args == 0) {
+	if (*i == 0 || (cmd->count_args == 0 && !cmd->args[cmd->count_args])) {
 		cmd->args = global_alloc(cmd->args, 1);
 	}
 	else if (ft_isspace(line[*i - 1]) && foo(line[*i])) {

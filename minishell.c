@@ -53,26 +53,9 @@ int	main(int argc, char **argv, char **envp) {
 		cmd = init_cmd(env);
 		line = rl_gets();
 		parsing(cmd, line, env);
-		
 		printf("%s\n", line);	//remove later
 		print_cmd(cmd);			//remove later
-		if (cmd->args) {
-			if (!ft_strcmp(cmd->args[0], "cd"))
-				cd_cmd(cmd, env);	
-			else if (!ft_strcmp(cmd->args[0], "pwd"))
-				pwd_cmd();
-			else if (!ft_strcmp(cmd->args[0], "env"))
-				env_cmd(cmd);
-			else if (!ft_strcmp(cmd->args[0], "echo"))
-				echo_cmd(cmd);
-			// else if (!ft_strcmp(cmd->args[0], "exit"))
-			// 	exit_cmd(cmd);
-			// else if (!ft_strcmp(cmd->args[0], "unset"))
-			// 	unset_cmd(cmd);
-			else if (!ft_strcmp(cmd->args[0], "export"))
-				export_cmd(cmd, env);
 		}
-
 		free(line);
 		free_cmd(cmd);
 	}

@@ -22,6 +22,7 @@
 
 int		g_exit;
 
+//структура для переменных окружения
 typedef struct	s_env
 {
 	char	*name;
@@ -59,12 +60,19 @@ void	free_cmd(t_cmds *cmd);
 void	pwd_cmd(void);
 void	env_cmd(t_cmds *cmd);
 void	cd_cmd(t_cmds *cmd, t_env *env);
+void	unset_cmd(t_cmds *cmd, t_env *env);
 void	error_builtin_cd(char *err);
+//for Zukhra
+//for Zukhra
+//for Zukhra
 void	echo_cmd(t_cmds *cmd);
 void	export_cmd(t_cmds *cmd, t_env *env);
 void	free_env(t_env *env);
+void	error_export(int nbr, char *err);
 t_env 	*addelem(t_env *lst, char *name, char *data);
+t_env	*delelem(t_env *lst, char *name);
+
 
 void print_arr(char **arr); //remove later,  it's for checking
-
+void print_lst(t_env *env);	//remove later,  it's for checking
 #endif

@@ -1,3 +1,6 @@
+//Без части исполнения не получается потестить.
+//Перед сдачей провести больше тестов!
+
 #include "../includes/minishell.h"
 
 void	print_echo(char **args) {

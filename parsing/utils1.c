@@ -42,7 +42,6 @@ void	ft_error(int err) {
 	exit(err);
 }
 
-
 void	free_env(t_env *env) {
 	t_env *tmp;
 

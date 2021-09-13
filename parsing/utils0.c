@@ -34,6 +34,35 @@ t_cmds	*init_cmd(t_env *env) {
 	return (cmd);
 }
 
+t_env *delelem(t_env *lst, char *name)
+{
+	t_env	*tmp;
+	t_env	*head;
+
+	if (!(ft_strcmp(lst->name, name))) {
+		tmp = lst;
+		lst = lst->next;
+		free(tmp->data);
+		free(tmp->name);
+		free(tmp);
+		return (lst);
+	}
+	head = lst;
+	while(lst) {
+		if (!(ft_strcmp(lst->next->name, name)))
+		{
+			tmp = lst->next;
+			lst->next = lst->next->next;
+			free(tmp->data);
+			free(tmp->name);
+			free(tmp);
+			return (head);
+		}
+		lst = lst->next;
+	}
+	return(head);
+}
+
 t_env *addelem(t_env *lst, char *name, char *data)
 {
 	t_env	*new_node;
