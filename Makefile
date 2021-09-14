@@ -13,6 +13,7 @@ INCLUDES		= includes/
 HEADER			= $(wildcard $(INCLUDES)*.h)
 
 SRC_DIR			= parsing/
+BUILT_DIR		= buitins/
 SRCS			= minishell.c	$(SRC_DIR)utils0.c \
 								$(SRC_DIR)utils1.c \
 								$(SRC_DIR)parsing.c \
@@ -20,6 +21,9 @@ SRCS			= minishell.c	$(SRC_DIR)utils0.c \
 								$(SRC_DIR)parse_quotes.c \
 								$(SRC_DIR)parse_env.c \
 								$(SRC_DIR)parse_redirect.c
+								$(BUILT_DIR)cd.c \
+								$(BUILT_DIR)pwd.c \
+								$(BUILT_DIR)env.c
 
 OBJ_DIR			= .objs/
 OBJS			= $(addprefix $(OBJ_DIR), $(notdir $(SRCS:%.c=%.o)))

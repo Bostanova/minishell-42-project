@@ -43,15 +43,16 @@ static char *get_envs_name(char *line, int *i) {
 	return (env);
 }
 
-static char	*add_str(char *s1, char *s2, int start) {
+static char	*add_str(char *s1, char *s2) {
 	char	*res;
 	int		j;
+	int		k;
 
-	j = start;
+	j = 0;
 	while (s2[j]) {
 		j += 1;
 	} 
-	res = (char *)malloc(ft_strlen(s1) + (j - start + 1) + 1);
+	res = (char *)malloc(ft_strlen(s1) + (j + 1) + 1);
 	if (!res)
 		ft_error(1);
 	j = 0;
@@ -60,10 +61,9 @@ static char	*add_str(char *s1, char *s2, int start) {
 			res[j] = s1[j];
 			j++;
 		}
-	while(s2[start]) {
-		res[j] = s2[start];
-		j += 1;
-		start += 1;
+	k = 0;
+	while(s2[k]) {
+		res[j++] = s2[k++];
 	}
 	res[j] = '\0';
 	if (s1) 
@@ -74,26 +74,29 @@ static char	*add_str(char *s1, char *s2, int start) {
 void	parse_env(t_cmds *cmd, char *line, int *i, int redir) {
 	char *env;
 	int j;
-	int len;
 
-	env = get_envs_name(line, i);
-	j = 0;
-	len = ft_strlen(env);
-	while (cmd->env[j]) {
-		if (!ft_strncmp(cmd->env[j], env, len) && cmd->env[j][len ] == '=') {
-			len += 1;
-			if (redir == LESS || redir == LESSLESS) {
-				cmd->infile = add_str(cmd->infile, cmd->env[j], len);
-			}
-			else if (redir == GREAT || redir == GREATGREAT) {
-				cmd->outfile = add_str(cmd->outfile, cmd->env[j], len);
-			}
-			else {
-				cmd->args[cmd->count_args] = add_str(cmd->args[cmd->count_args], cmd->env[j], len);
-			}
-		}
-		j += 1;
+	if (ft_isspace(line[*i + 1])) {
+		cmd->args[cmd->count_args] = add_char(cmd->args[cmd->count_args], line[*i]);
+		*i += 1;
 	}
-	if (env)
-		free(env);
+	else {
+		env = get_envs_name(line, i);
+		j = 0;
+		while (cmd->env) {
+			if (!(ft_strcmp(cmd->env->name, env))) {
+				if (redir == LESS || redir == LESSLESS) {
+					cmd->infile = add_str(cmd->infile, cmd->env->data);
+				}
+				else if (redir == GREAT || redir == GREATGREAT) {
+					cmd->outfile = add_str(cmd->outfile, cmd->env->data);
+				}
+				else {
+					cmd->args[cmd->count_args] = add_str(cmd->args[cmd->count_args], cmd->env->data);
+				}
+			}
+			cmd->env = cmd->env->next;
+		}
+		if (env)
+			free(env);
+	}
 }

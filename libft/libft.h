@@ -66,5 +66,6 @@ int		get_next_line(int fd, char **line);
 char	**ft_split(char const *s, char c);
 char	*ft_join(char const *s1, char const *s2);
 char	**ft_split_with_spaces(char const *s);
+void	ft_strscpy(char *s1, char *s2, int start);
 
 #endif

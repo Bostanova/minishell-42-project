@@ -17,7 +17,7 @@ SRC 		=	ft_isdigit.c ft_islower.c ft_isupper.c ft_isalpha.c \
 				ft_memchr.c ft_memcmp.c \
 				ft_calloc.c ft_realloc.c\
 				ft_itoa.c ft_atoi.c get_next_line.c ft_split.c \
-				ft_join.c ft_split_with_spaces.c
+				ft_join.c ft_split_with_spaces.c ft_strscpy.c
 		
 OBJ 		= $(SRC:.c=.o)
 
