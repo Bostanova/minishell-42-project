@@ -62,7 +62,7 @@ void	env_cmd(t_cmds *cmd);
 void	cd_cmd(t_cmds *cmd, t_env *env);
 void	unset_cmd(t_cmds *cmd, t_env *env);
 void	error_builtin_cd(char *err);
-//for Zukhra
+void	error_cd(int nbr);
 //for Zukhra
 //for Zukhra
 void	echo_cmd(t_cmds *cmd);

@@ -55,13 +55,12 @@ int	main(int argc, char **argv, char **envp) {
 		parsing(cmd, line, env);
 		printf("%s\n", line);	//remove later
 		print_cmd(cmd);			//remove later
-		}
+
 		free(line);
 		free_cmd(cmd);
 	}
 	clear_history();
 	free_env(env);
-
 
 	// system("leaks minishell");
 	// export MallocStackLogging=1  - in bash

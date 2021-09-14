@@ -7,8 +7,9 @@
 
 #include "../includes/minishell.h"
 
-void	exit_cmd(void)
+void	exit_cmd(int errexist, int nbr)
 {
 	printf("exit\n");
-	exit(0);
+	if (errexist)
+		g_exit = nbr;
 }

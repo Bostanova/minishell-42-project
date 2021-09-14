@@ -18,7 +18,7 @@ void	free_cmd(t_cmds *cmd) {
 	t_cmds *tmp;
 
 	while (cmd) {
-		tmp = cmd;
+		tmp = cmd->next;
 		i = 0;
 		if (cmd->args) {
 			while (i < cmd->count_args) {
@@ -32,14 +32,8 @@ void	free_cmd(t_cmds *cmd) {
 		if (cmd->outfile)
 			free(cmd->outfile);
 		free(cmd);
-		cmd = tmp->next;
+		cmd = tmp;
 	}
-}
-
-void	ft_error(int err) {
-	if (err == 1)
-		printf("Error: cannot allocate memory\n");
-	exit(err);
 }
 
 void	free_env(t_env *env) {
@@ -50,6 +44,6 @@ void	free_env(t_env *env) {
 		free(env->data);
 		free(env->name);
 		free(env);
-		env = env->next;
+		env = tmp;
 	}
 }

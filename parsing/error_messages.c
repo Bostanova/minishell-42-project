@@ -5,3 +5,9 @@ void	error_export(int nbr, char *err) {
 	printf ("minishell: export: %s\n", err);
 	exit(g_exit);
 }
+
+void	ft_error(int err) {
+	if (err == 1)
+		printf("Error: cannot allocate memory\n");
+	exit(err);
+}
