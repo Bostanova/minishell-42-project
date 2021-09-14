@@ -1,30 +1,30 @@
-NAME			:= 	minishell
+NAME				:= 	minishell
 
-CC				:= 	gcc
-RM				:= 	rm -rf
+CC					:= 	gcc
+RM					:= 	rm -rf
 
-OFLAGS			:=	-O2 -g#-fsanitize=address
-CFLAGS			:= 	$(OFLAGS) -Wall #-Wextra #-Werror
-NORM			:= 	-R CheckForbiddenSourceHeader
+OFLAGS				:=	-O2 -g#-fsanitize=address
+CFLAGS				:= 	$(OFLAGS) -Wall #-Wextra #-Werror
+NORM				:= 	-R CheckForbiddenSourceHeader
 
-LIBFT_DIR		:= 	libft/
-LIBFT			:= 	$(LIBFT_DIR)libft.a
+LIBFT_DIR			:= 	libft/
+LIBFT				:= 	$(LIBFT_DIR)libft.a
 
-INCLUDES		:= 	includes/
-HEADER			:= 	$(INCLUDES)*.h
+INCLUDES			:= 	includes/
+HEADER				:= 	$(INCLUDES)*.h
 
-SRCS_DIR		:= 	parsing/
-SRCS			:= 	$(SRCS_DIR)minishell.c\
-					$(SRCS_DIR)utils0.c \
-					$(SRCS_DIR)utils1.c \
-					$(SRCS_DIR)parsing.c \
-					$(SRCS_DIR)parse_cmd.c \
-					$(SRCS_DIR)parse_quotes.c \
-					$(SRCS_DIR)parse_env.c \
-					$(SRCS_DIR)parse_redirect.c\
+SRCS_DIR			:= 	parsing/
+SRCS				:= 	$(SRCS_DIR)minishell.c\
+						$(SRCS_DIR)utils0.c \
+						$(SRCS_DIR)utils1.c \
+						$(SRCS_DIR)parsing.c \
+						$(SRCS_DIR)parse_cmd.c \
+						$(SRCS_DIR)parse_quotes.c \
+						$(SRCS_DIR)parse_env.c \
+						$(SRCS_DIR)parse_redirect.c\
 
-OBJS_DIR		:=	.objs/
-OBJS			:=	$(addprefix $(OBJS_DIR), $(notdir $(SRCS:%.c=%.o)))
+OBJS_DIR			:=	.objs/
+OBJS				:=	$(addprefix $(OBJS_DIR), $(notdir $(SRCS:%.c=%.o)))
 
 all:				libft_make $(NAME)
 
