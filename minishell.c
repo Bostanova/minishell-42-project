@@ -1,4 +1,5 @@
-#include "./includes/minishell.h"
+#include "minishell.h"
+
 //for checking cmd structure, remove later
 void print_arr(char **arr) {
 	int i = 0;
