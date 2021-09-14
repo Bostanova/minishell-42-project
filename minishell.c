@@ -1,4 +1,5 @@
-#include "./includes/minishell.h"
+#include "minishell.h"
+
 //for checking cmd structure, remove later
 void print_arr(char **arr) {
 	int i = 0;
@@ -48,6 +49,7 @@ int	main(int argc, char **argv, char **envp) {
 
 	g_exit = 0;
 	env = get_array_of_env(envp);
+	// signals();
 	for (int k = 0; k < 5; k++)  // change to "while (TRUE)"
 	{
 		cmd = init_cmd(env);
@@ -55,6 +57,7 @@ int	main(int argc, char **argv, char **envp) {
 		parsing(cmd, line, env);
 		printf("%s\n", line);	//remove later
 		print_cmd(cmd);			//remove later
+		// launch();
 
 		free(line);
 		free_cmd(cmd);
