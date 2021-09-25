@@ -2,9 +2,13 @@
 
 void	env_cmd(t_cmds *cmd)
 {
-	while (cmd->env)
+	int	i;
+
+	i = 0;
+	while (cmd->env[i])
 	{
-		printf("%s=%s\n", cmd->env->name, cmd->env->data);
-		cmd->env = cmd->env->next;
+		write(STDOUT_FILENO, cmd->env[i], ft_strlen(cmd->env[i]) + 1);
+		write(STDOUT_FILENO, "\n", 1);
+		i++;
 	}
 }

@@ -1,4 +1,4 @@
-#include "libft.h"
+#include "../includes/get_next_line.h"
 
 int		check_new_line(char *str)
 {
@@ -37,7 +37,7 @@ char	*change_alloc(char *stat_buf)
 		free(stat_buf);
 		return (0);
 	}
-	result = malloc((ft_strlen(stat_buf) - i) + 1);
+	result = malloc((gnl_len(stat_buf) - i) + 1);
 	if (!result)
 		return (0);
 	i++;
@@ -94,7 +94,7 @@ int		get_next_line(int fd, char **line)
 			return (-1);
 		}
 		buffer[len_to_eof] = '\0';
-		stat_buf = ft_strjoin(stat_buf, buffer);
+		stat_buf = gnl_strjoin(stat_buf, buffer);
 	}
 	free(buffer);
 	*line = copy_from_static(stat_buf);

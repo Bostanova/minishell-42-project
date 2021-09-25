@@ -1,28 +1,5 @@
 #include "../includes/minishell.h"
 
-static char *quote_proccesing(char *line, int *i) {
-	char *env;
-
-	env = NULL;
-	if (line[*i] == '\'') {
-		*i += 1;
-		while (line[*i] != '\'') {
-			env = add_char(env, line[*i]);
-			*i += 1;
-		}
-		*i += 1;
-	}
-	else if (line[*i] == '"') {
-		*i += 1;
-		while (line[*i] != '"') {
-			env = add_char(env, line[*i]);
-			*i += 1;
-		}
-		*i += 1;
-	}
-	return (env);
-}
-
 static int stophere(char c) {
 	if (c == '<' || c == '\'' || c == '\"' \
 		|| c == '>' || c == '|' || ft_isspace(c)) {
@@ -40,19 +17,16 @@ static char *get_envs_name(char *line, int *i) {
 		env = add_char(env, line[*i]);
 		*i += 1;
 	}
+	env = add_char(env, '=');
 	return (env);
 }
 
-static char	*add_str(char *s1, char *s2) {
+static char	*add_str(char *s1, char *s2, int start) {
 	char	*res;
 	int		j;
 	int		k;
 
-	j = 0;
-	while (s2[j]) {
-		j += 1;
-	} 
-	res = (char *)malloc(ft_strlen(s1) + (j + 1) + 1);
+	res = (char *)malloc(ft_strlen(s1) + ft_strlen(s2) - start + 1);
 	if (!res)
 		ft_error(1);
 	j = 0;
@@ -61,7 +35,7 @@ static char	*add_str(char *s1, char *s2) {
 			res[j] = s1[j];
 			j++;
 		}
-	k = 0;
+	k = start;
 	while(s2[k]) {
 		res[j++] = s2[k++];
 	}
@@ -74,27 +48,34 @@ static char	*add_str(char *s1, char *s2) {
 void	parse_env(t_cmds *cmd, char *line, int *i, int redir) {
 	char *env;
 	int j;
+	char *tmp;
 
 	if (ft_isspace(line[*i + 1])) {
 		cmd->args[cmd->count_args] = add_char(cmd->args[cmd->count_args], line[*i]);
 		*i += 1;
 	}
+	if (line[*i + 1] == '?') {
+		tmp = ft_itoa(g_exit);
+		printf("%s\n", tmp);
+		cmd->args[cmd->count_args] = add_str(cmd->args[cmd->count_args], tmp, 0);
+		*i += 2;
+	}
 	else {
 		env = get_envs_name(line, i);
 		j = 0;
-		while (cmd->env) {
-			if (!(ft_strcmp(cmd->env->name, env))) {
-				if (redir == LESS || redir == LESSLESS) {
-					cmd->infile = add_str(cmd->infile, cmd->env->data);
+		while (cmd->env[j]) {
+			if (!(ft_strncmp(cmd->env[j], env, ft_strlen(env)))) {
+				if (redir == LESS) {
+					cmd->infile = add_str(cmd->infile, cmd->env[j], ft_strlen(env));
 				}
 				else if (redir == GREAT || redir == GREATGREAT) {
-					cmd->outfile = add_str(cmd->outfile, cmd->env->data);
+					cmd->outfile = add_str(cmd->outfile, cmd->env[j], ft_strlen(env));
 				}
 				else {
-					cmd->args[cmd->count_args] = add_str(cmd->args[cmd->count_args], cmd->env->data);
+					cmd->args[cmd->count_args] = add_str(cmd->args[cmd->count_args], cmd->env[j], ft_strlen(env));
 				}
 			}
-			cmd->env = cmd->env->next;
+			j++;
 		}
 		if (env)
 			free(env);

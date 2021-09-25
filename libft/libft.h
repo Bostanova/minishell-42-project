@@ -62,7 +62,6 @@ void	ft_lstdelone(t_list *lst, void (*del)(void*));
 void	ft_lstclear(t_list **lst, void (*del)(void*));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
-int		get_next_line(int fd, char **line);
 char	**ft_split(char const *s, char c);
 char	*ft_join(char const *s1, char const *s2);
 char	**ft_split_with_spaces(char const *s);

@@ -35,15 +35,3 @@ void	free_cmd(t_cmds *cmd) {
 		cmd = tmp;
 	}
 }
-
-void	free_env(t_env *env) {
-	t_env *tmp;
-
-	while (env) {
-		tmp = env->next;
-		free(env->data);
-		free(env->name);
-		free(env);
-		env = tmp;
-	}
-}

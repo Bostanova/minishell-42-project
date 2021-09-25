@@ -34,7 +34,7 @@ static void	alloc_new_arg(t_cmds *cmd, char *line, int *i) {
 	}
 }
 
-void	parsing(t_cmds *cmd, char *line, t_env *env) {
+void	parsing(t_cmds *cmd, char *line, char **env) {
 	int *i;
 	
 	i = (int *)malloc(sizeof(int));

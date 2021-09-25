@@ -1,5 +1,4 @@
-#include "minishell.h"
-
+#include "./includes/minishell.h"
 //for checking cmd structure, remove later
 void print_arr(char **arr) {
 	int i = 0;
@@ -33,37 +32,30 @@ void print_cmd(t_cmds *cmd) {
 	}
 }
 
-void print_lst(t_env *env) {
-	t_env *head = env;
-
-	while (env) {
-		printf("%s=%s\n", env->name, env->data);
-		env = env->next;
-	}
-}
-
 int	main(int argc, char **argv, char **envp) {
 	char	*line;
-	t_env	*env;
+	char	**env;
 	t_cmds	*cmd;
 
+	(void)argc;
+	(void)argv;
 	g_exit = 0;
+	env = NULL;
 	env = get_array_of_env(envp);
-	// signals();
-	for (int k = 0; k < 5; k++)  // change to "while (TRUE)"
+	for (int k = 0; k < 4; k++)  // change to "while (TRUE)"
 	{
 		cmd = init_cmd(env);
 		line = rl_gets();
 		parsing(cmd, line, env);
 		printf("%s\n", line);	//remove later
 		print_cmd(cmd);			//remove later
-		// launch();
-
-		free(line);
+		// launch(cmd, &env);
+		if (line)
+			free(line);
 		free_cmd(cmd);
 	}
 	clear_history();
-	free_env(env);
+	free_arr(env);
 
 	// system("leaks minishell");
 	// export MallocStackLogging=1  - in bash

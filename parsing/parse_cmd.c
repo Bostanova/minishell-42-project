@@ -63,3 +63,4 @@ void	parse_cmd(t_cmds *cmd, char *line, int *i) {
 		*i += 1;
 	}
 }
+ 
