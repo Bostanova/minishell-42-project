@@ -7,7 +7,8 @@
 #include <stdio.h>
 #include <fcntl.h>
 #include <errno.h>
- #include <sys/stat.h>
+#include <signal.h>
+#include <sys/stat.h>
 #include <readline/readline.h>
 #include <readline/history.h>
 #include "../libft/libft.h"
@@ -60,6 +61,14 @@ void	export_cmd(t_cmds *cmd, char ***env);
 void	error_export(int nbr, char *err);
 void	exit_cmd(t_cmds *cmd);
 void	error_exit(int nbr, char *err);
+void	execution(t_cmds *cmd, char ***env);
+void	error_cmd_not_found(int nbr, char *err);
+void	error_open_file(int nbr, char *err);
+char	*test_path(char **path, char *cmd);
+char	**get_path(char **env);
+void	open_files(t_cmds *cmd, int *infile_fd, int *outfile_fd);
+int		check_buildin(char *cmd);
+void	exec_buildins(t_cmds *cmd, char ***env);
 
 
 void print_arr(char **arr); //remove later,  it's for checking

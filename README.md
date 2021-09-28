@@ -1,2 +1,3 @@
-gcc -g minishell.c parsing/*.c builtins/*.c libft/*.c -lreadline -o minishell
+gcc -g *.c parsing/*.c builtins/*.c exec/*.c  libft/*.c -lreadline -o minishell
 
+valgrind --trace-children=yes ./minishell
