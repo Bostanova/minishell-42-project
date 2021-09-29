@@ -68,7 +68,7 @@ char	*test_path(char **path, char *cmd);
 char	**get_path(char **env);
 void	open_files(t_cmds *cmd, int *infile_fd, int *outfile_fd);
 int		check_buildin(char *cmd);
-void	exec_buildins(t_cmds *cmd, char ***env);
+void	exec_buildins(t_cmds *cmd, int outfile_fd, char ***env, int stdin_initial);
 
 
 void print_arr(char **arr); //remove later,  it's for checking
