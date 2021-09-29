@@ -1,7 +1,61 @@
 #include "../includes/minishell.h"
-//I have to do that :((
-void	printing(char ***env) {
-	printf("1\n");
+
+static char	**sort_env(char **env, int len)
+{
+	int		i;
+	int		j;
+	char	**new;
+	char	*tmp;
+
+	new = (char **)malloc(sizeof(char *) * (len + 1));
+	new[len] = NULL;
+	i = -1;
+	while (env[++i])
+		new[i] = ft_strdup(env[i]);
+	i = -1;
+	while (++i < len)
+	{
+		j = -1;
+		while (++j < len - 1)
+		{
+			if (ft_strncmp(new[j], new[j + 1], ft_strlen(new[j]) + 1) > 0)
+			{
+				tmp = new[j + 1];
+				new[j + 1] = new[j];
+				new[j] = tmp;
+			}
+		}
+	}
+	return (new);
+}
+
+static void	printing(char **env)
+{
+	char	**sort;
+	int		i;
+	int		j;
+
+	i = 0;
+	while (env[i])
+		i++;
+	sort = sort_env(env, i);
+	i = -1;
+	while (sort[++i])
+	{
+		ft_putstr_fd("declare -x ", 1);
+		j = 0;
+		while (sort[i][j] && sort[i][j] != '=')
+			ft_putchar_fd(sort[i][j++], 1);
+		if (sort[i][j])
+		{
+			ft_putchar_fd(sort[i][j++], 1);
+			ft_putchar_fd('"', 1);
+			ft_putstr_fd(sort[i] + j, 1);
+			ft_putchar_fd('"', 1);
+		}
+		ft_putchar_fd('\n', 1);
+	}
+	free_arr(sort);
 }
 
 void	add_env(char ***env, char *str, int size) {
@@ -52,7 +106,7 @@ void	export_cmd(t_cmds *cmd, char ***env) {
 
 	i = 1;
 	if (!cmd->args[1]) {
-		printing(env);
+		printing(*env);
 	}
 	else {
 		while(cmd->args[i] && ft_strchr(cmd->args[i], '=')) {
