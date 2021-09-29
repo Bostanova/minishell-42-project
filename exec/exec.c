@@ -16,6 +16,8 @@ void	exec_cmd(t_cmds *cmd, int isbuildin, char ***env)
 			exec_buildins(cmd, env);
 			exit(EXIT_SUCCESS);
 		}
+		else if (!cmd->args[0])
+			exit(EXIT_SUCCESS);
 		else
 			execve(cmd->args[0], cmd->args, cmd->env);
 	}
@@ -38,6 +40,8 @@ void	exec_last_cmd(t_cmds *cmd, int isbuildin, char ***env, int stdin_initial)
 			exec_buildins(cmd, env);
 			exit(EXIT_SUCCESS);
 		}
+		else if (!cmd->args[0])
+			exit(EXIT_SUCCESS);
 		else
 			execve(cmd->args[0], cmd->args, cmd->env);
 	}	
@@ -63,6 +67,8 @@ void	write_outfile(t_cmds *cmd, int outfile_fd, int isbuildin, char ***env, int 
 			exec_buildins(cmd, env);
 			exit(EXIT_SUCCESS);
 		}
+		else if (!cmd->args[0])
+			exit(EXIT_SUCCESS);
 		else
 			execve(cmd->args[0], cmd->args, cmd->env);
 	}
@@ -95,12 +101,12 @@ void	execution(t_cmds *cmd, char ***env){
 			}
 		}
 		open_files(cmd, &in_out[0], &in_out[1]);
-		if (cmd->outfile)
-			write_outfile(cmd, in_out[1], isbuildin, env, stdin_initial);
-		else if (cmd->outfile == NULL && cmd->next == NULL)
-			exec_last_cmd(cmd, isbuildin, env, stdin_initial);
-		else
-			exec_cmd(cmd, isbuildin, env);	
+			if (cmd->outfile)
+				write_outfile(cmd, in_out[1], isbuildin, env, stdin_initial);
+			else if (cmd->outfile == NULL && cmd->next == NULL)
+				exec_last_cmd(cmd, isbuildin, env, stdin_initial);
+			else
+				exec_cmd(cmd, isbuildin, env);
 		free_arr(path);
 		if (tmp)
 			free(tmp);
