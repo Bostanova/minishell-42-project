@@ -21,7 +21,8 @@ void	echo_cmd(t_cmds *cmd)
 	if (cmd->args[1]) {
 		print_echo(cmd->args);
 	}
+	else
+		write(STDOUT_FILENO, "\n", 1);
 	if (ft_strcmp(cmd->args[1], "-n"))
 		write(STDOUT_FILENO, "\n", 1);
 }
-

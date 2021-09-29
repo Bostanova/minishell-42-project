@@ -28,6 +28,10 @@ void print_cmd(t_cmds *cmd) {
 		printf("cmd->pipe:	%d\n", cmd->pipe);
 		printf("cmd->infile:	%s\n", cmd->infile);
 		printf("cmd->outfile:	%s\n", cmd->outfile);
+		if (cmd->next == NULL)
+			printf("cmd->next = null\n");
+		else
+			printf("cmd->next != null\n");
 		cmd = tmp->next;
 	}
 }
@@ -46,13 +50,13 @@ int	main(int argc, char **argv, char **envp) {
 	{
 		cmd = init_cmd(env);
 		line = rl_gets();
-		parsing(cmd, line, env);
-		// print_cmd(cmd);			//remove later
-		execution(cmd, &env);
+		if (!(parsing(cmd, line, env))){
+			// print_cmd(cmd);
+			execution(cmd, &env);
+		}
 		if (line)
 			free(line);
 		free_cmd(cmd);
-		// printf("1\n");
 	}
 	clear_history();
 	free_arr(env);

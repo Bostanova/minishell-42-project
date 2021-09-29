@@ -38,7 +38,7 @@ typedef struct s_cmds
 char	*rl_gets (void);
 t_cmds	*init_cmd(char **env);
 char	**get_array_of_env(char **envp);
-void	parsing(t_cmds *cmd, char *line, char **env);
+int		parsing(t_cmds *cmd, char *line, char **env);
 char	**global_alloc(char **arr, int size);
 char	*add_char(char *str, char c);
 int		is_new_arg(char c);
@@ -72,4 +72,5 @@ void	exec_buildins(t_cmds *cmd, char ***env);
 
 
 void print_arr(char **arr); //remove later,  it's for checking
+void print_cmd(t_cmds *cmd);
 #endif

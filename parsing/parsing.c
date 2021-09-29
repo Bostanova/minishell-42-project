@@ -34,9 +34,11 @@ static void	alloc_new_arg(t_cmds *cmd, char *line, int *i) {
 	}
 }
 
-void	parsing(t_cmds *cmd, char *line, char **env) {
+int	parsing(t_cmds *cmd, char *line, char **env) {
 	int *i;
 	
+	if (!line[0])
+		return (1);
 	i = (int *)malloc(sizeof(int));
 	*i = 0;
 	while (line[*i]) {
@@ -71,4 +73,5 @@ void	parsing(t_cmds *cmd, char *line, char **env) {
 		}
 	}
 	free(i);
+	return (0);
 }
