@@ -12,7 +12,8 @@ void	create_new_env(char ***env, int len, int skip){
 	while ((*env)[g]) {
 		if (g == skip)
 			g++;
-		res[j] = ft_strdup((*env)[g]);
+		if ((*env)[g])
+			res[j] = ft_strdup((*env)[g]);
 		g++;
 		j++;
 	}
@@ -30,7 +31,7 @@ void	del_env(char ***env, char *str){
 	tmp = ft_strdup(str);
 	tmp = ft_join(tmp, "=");
 	while ((*env)[h]) {
-		if (!(ft_strncmp((*env)[h], tmp, ft_strlen(tmp)))) 
+		if (!(ft_strncmp((*env)[h], tmp, ft_strlen(tmp))))
 			index = h;
 		h++;
 	}

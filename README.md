@@ -11,9 +11,6 @@ env | grep HOME - Binary file (standard input) matches
 
 unset "" a
 unset a "" "" asd 123 "" 
-unset a b c - segfault
 
 << EOF - segfault
 << EOF | wc -l
-
-unset a
