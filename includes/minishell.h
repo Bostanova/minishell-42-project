@@ -46,7 +46,7 @@ void	parse_cmd(t_cmds *cmd, char *line, int *i);
 void	parse_single_quotes(t_cmds *cmd, char *line, int *i, int redir);
 void	parse_double_quotes(t_cmds *cmd, char *line, int *i, int redir);
 void	parse_env(t_cmds *cmd, char *line, int *i, int redir);
-void	parse_redirect(t_cmds *cmd, char *line, int *i);
+int		parse_redirect(t_cmds *cmd, char *line, int *i);
 void 	free_arr(char **arr);
 void	ft_error(int err);
 void	free_cmd(t_cmds *cmd);
@@ -69,6 +69,8 @@ char	**get_path(char **env);
 void	open_files(t_cmds *cmd, int *infile_fd, int *outfile_fd);
 int		check_buildin(char *cmd);
 void	exec_buildins(t_cmds *cmd, int outfile_fd, char ***env, int stdin_initial);
+void	exec_cmd(t_cmds *cmd, int isbuildin, char ***env);
+void	go_to_buildin(t_cmds *cmd, char ***env);
 
 
 void print_arr(char **arr); //remove later,  it's for checking

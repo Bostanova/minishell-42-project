@@ -13,6 +13,10 @@ void	exec_cmd(t_cmds *cmd, int isbuildin, char ***env)
 		close(fd[1]);
 		if (!cmd->args[0])
 			exit(EXIT_SUCCESS);
+		else if (isbuildin) {
+			go_to_buildin(cmd, env);
+			exit(g_exit);
+		}
 		else
 			execve(cmd->args[0], cmd->args, cmd->env);
 	} else {
@@ -23,7 +27,7 @@ void	exec_cmd(t_cmds *cmd, int isbuildin, char ***env)
 	}
 }
 
-void	exec_last_cmd(t_cmds *cmd, int isbuildin, char ***env, int stdin_initial)
+void	exec_last_cmd(t_cmds *cmd, char ***env, int stdin_initial)
 {
 	pid_t	pid;
 
@@ -33,7 +37,7 @@ void	exec_last_cmd(t_cmds *cmd, int isbuildin, char ***env, int stdin_initial)
 			exit(EXIT_SUCCESS);
 		else
 			execve(cmd->args[0], cmd->args, cmd->env);
-	}	
+	}
 	else {
 		waitpid(pid, NULL, 0);
 		if (stdin_initial != STDIN_FILENO)
@@ -41,7 +45,7 @@ void	exec_last_cmd(t_cmds *cmd, int isbuildin, char ***env, int stdin_initial)
 	}
 }
 
-void	write_outfile(t_cmds *cmd, int outfile_fd, int isbuildin, char ***env, int stdin_initial)
+void	write_outfile(t_cmds *cmd, int outfile_fd, char ***env, int stdin_initial)
 {
 	pid_t	pid;
 
@@ -87,9 +91,9 @@ void	execution(t_cmds *cmd, char ***env){
 		}
 		else {
 			if (cmd->outfile)
-				write_outfile(cmd, in_out[1], isbuildin, env, stdin_initial);
+				write_outfile(cmd, in_out[1], env, stdin_initial);
 			else if (cmd->outfile == NULL && cmd->next == NULL)
-				exec_last_cmd(cmd, isbuildin, env, stdin_initial);
+				exec_last_cmd(cmd, env, stdin_initial);
 			else
 				exec_cmd(cmd, isbuildin, env);
 		}

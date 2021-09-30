@@ -23,6 +23,8 @@ void	echo_cmd(t_cmds *cmd)
 	}
 	else
 		write(STDOUT_FILENO, "\n", 1);
-	if (ft_strcmp(cmd->args[1], "-n"))
+	if (cmd->args[1]) {
+		if (ft_strcmp(cmd->args[1], "-n"))
 		write(STDOUT_FILENO, "\n", 1);
+	}
 }

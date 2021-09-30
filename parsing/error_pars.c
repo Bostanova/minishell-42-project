@@ -4,12 +4,12 @@ void	error_export(int nbr, char *err) {
 	g_exit = nbr;
 	write(STDOUT_FILENO, "minishell: export: ", 20);
 	write(STDOUT_FILENO, err, ft_strlen(err) + 1);
-	write(STDOUT_FILENO, ": not a valid identifier\n", 25);
+	write(STDOUT_FILENO, ": not a valid identifier\n", 26);
 }
 
 void	error_unset(int nbr, char *err) {
 	g_exit = nbr;
-	write(STDOUT_FILENO, "minishell: unset: ", 20);
+	write(STDOUT_FILENO, "minishell: unset: ", 19);
 	write(STDOUT_FILENO, err, ft_strlen(err) + 1);
 	write(STDOUT_FILENO, ": not a valid identifier\n", 26);
 }

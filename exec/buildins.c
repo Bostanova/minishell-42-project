@@ -28,18 +28,6 @@ void	go_to_buildin(t_cmds *cmd, char ***env)
 		export_cmd(cmd, env);
 }
 
-void	exec_buildins_in_middle_of_line(t_cmds *cmd, char ***env, int stdout_initial) {
-	int		fd[2];
-
-	pipe(fd);
-	// close(fd[0]);
-	dup2(fd[1], STDOUT_FILENO);
-	// close(fd[1]);
-	go_to_buildin(cmd, env);
-	dup2(fd[0], STDIN_FILENO);	
-	dup2(stdout_initial, STDOUT_FILENO);
-}
-
 void	exec_buildins(t_cmds *cmd, int outfile_fd, char ***env, int stdin_initial) {
 	int	stdout_initial;
 
@@ -53,12 +41,18 @@ void	exec_buildins(t_cmds *cmd, int outfile_fd, char ***env, int stdin_initial) 
 		if (stdin_initial != STDIN_FILENO)
 			dup2(stdin_initial, STDIN_FILENO);
 	}
-	else if (cmd->outfile == NULL && cmd->next == NULL)
+	else if (cmd->outfile == NULL && cmd->next == NULL) {
 		go_to_buildin(cmd, env);
-		dup2(stdout_initial, STDOUT_FILENO);
-		close(stdout_initial);
-		if (stdin_initial != STDIN_FILENO)
+		if (stdout_initial != STDOUT_FILENO) {
+			dup2(stdout_initial, STDOUT_FILENO);
+			close (stdout_initial);
+		}
+		if (stdin_initial != STDIN_FILENO) {
 			dup2(stdin_initial, STDIN_FILENO);
-	else
-		exec_buildins_in_middle_of_line(cmd, env, stdout_initial);
+			close(stdin_initial);
+		}
+	}
+	else {
+		exec_cmd(cmd, 1, env);
+	}
 }

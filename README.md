@@ -5,25 +5,15 @@ valgrind --trace-children=yes ./minishell
 
 Fix it:
 
-$? - порождает новый процесс, который не убивается,
-	работает неправильно,
-	утечка
+коды выхода
 
-echo $ a - не печатает 'a'
-
-exit - din't close the programm
-
-export - забыла сделать
-export 'a'='b'
-export a=6 b=8 c=9
-
-env | grep SHLVL - Binary file (standard input) matches
+env | grep HOME - Binary file (standard input) matches
 
 unset "" a
-unset a ""
+unset a "" "" asd 123 "" 
+unset a b c - segfault
 
-cd /Users/eerika,  cd $HOME, pwd - переход не совершен
+<< EOF - segfault
+<< EOF | wc -l
 
-ls><abc
-ls <> abc
-
+unset a

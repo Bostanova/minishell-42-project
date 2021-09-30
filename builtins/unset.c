@@ -2,18 +2,18 @@
 
 void	create_new_env(char ***env, int len, int skip){
 	char	**res;
-	int		i;
+	int		g;
 	int		j;
 
 	res = (char **)malloc(sizeof(char *) * len);
 	res[len - 1] = NULL;
-	i = 0;
+	g = 0;
 	j = 0;
-	while ((*env)[i]) {
-		if (i == skip)
-			i++;
-		res[j] = ft_strdup((*env)[i]);
-		i++;
+	while ((*env)[g]) {
+		if (g == skip)
+			g++;
+		res[j] = ft_strdup((*env)[g]);
+		g++;
 		j++;
 	}
 	free_env(env);
@@ -21,22 +21,22 @@ void	create_new_env(char ***env, int len, int skip){
 }
 
 void	del_env(char ***env, char *str){
-	int		i;
+	int		h;
 	int		index;
 	char	*tmp;
 
-	i = 0;
+	h = 0;
 	index = 0;
 	tmp = ft_strdup(str);
 	tmp = ft_join(tmp, "=");
-	while ((*env)[i]) {
-		if (!(ft_strncmp((*env)[i], tmp, ft_strlen(tmp)))) 
-			index = i;
-		i++;
+	while ((*env)[h]) {
+		if (!(ft_strncmp((*env)[h], tmp, ft_strlen(tmp)))) 
+			index = h;
+		h++;
 	}
 	free(tmp);
 	if (index)
-		create_new_env(env, i, index);
+		create_new_env(env, h, index); 
 }
 
 void	del_env_with_value(char ***env, char *str){

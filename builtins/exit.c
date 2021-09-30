@@ -1,7 +1,7 @@
 #include "../includes/minishell.h"
 
 void	exit_with_value(t_cmds *cmd) {
-	int	i;
+	unsigned long	i;
 
 	i = 0;
 	if (cmd->args[1][i] == '-' || cmd->args[1][i] == '+')

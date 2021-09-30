@@ -53,8 +53,11 @@ int	parsing(t_cmds *cmd, char *line, char **env) {
 			parse_double_quotes(cmd, line, i, 0);
 		}
 		else if (line[*i] == '<' || line[*i] == '>') {
-			parse_redirect(cmd, line, i);
+			if (parse_redirect(cmd, line, i)) {
+				free(i);
+				return (1);
 			}
+		}
 		else if (line[*i] == '$') {
 			parse_env(cmd, line, i, 0);
 		}

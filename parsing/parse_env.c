@@ -46,19 +46,19 @@ static char	*add_str(char *s1, char *s2, int start) {
 }
 
 void	parse_env(t_cmds *cmd, char *line, int *i, int redir) {
-	char *env;
-	int j;
-	char *tmp;
+	char	*env;
+	int		j;
+	char	*tmp;
 
 	if (ft_isspace(line[*i + 1])) {
 		cmd->args[cmd->count_args] = add_char(cmd->args[cmd->count_args], line[*i]);
 		*i += 1;
 	}
-	if (line[*i + 1] == '?') {
+	else if (line[*i + 1] == '?') {
 		tmp = ft_itoa(g_exit);
-		printf("%s\n", tmp);
 		cmd->args[cmd->count_args] = add_str(cmd->args[cmd->count_args], tmp, 0);
 		*i += 2;
+		free(tmp);
 	}
 	else {
 		env = get_envs_name(line, i);

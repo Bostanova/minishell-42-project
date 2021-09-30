@@ -49,15 +49,16 @@ void	parse_output(t_cmds *cmd, char *line, int *i) {
 	}
 }
 
-void	parse_redirect(t_cmds *cmd, char *line, int *i) {
+int	parse_redirect(t_cmds *cmd, char *line, int *i) {
 	if (line[*i] == '<') {
 		if (line[*i + 1] == '<') {
 			cmd->redir[0] = LESSLESS;
 			*i += 1;
 		}
 		else if (line[*i + 1] == '>') {
-			cmd->redir[0] = LESS;
-			*i += 1;
+			cmd->redir[1] = GREAT;
+			*i += 2;
+			parse_output(cmd, line, i);
 		}
 		else {
 			cmd->redir[0] = LESS;
@@ -67,17 +68,22 @@ void	parse_redirect(t_cmds *cmd, char *line, int *i) {
 	}
 	else {
 		if (line[*i + 1] == '<') {
-			cmd->redir[1] = SYNTAXERROR;
-			*i += 1;
+			// cmd->redir[1] = SYNTAXERROR;
+			// *i += 1;
+			g_exit = 258;
+			printf("minishell: syntax error near unexpected token '<'\n");
+			return (1);
 		}
 		else if (line[*i + 1] == '>') {
 			cmd->redir[1] = GREATGREAT;
-			*i += 1;
+			*i += 2;
+			parse_output(cmd, line, i);
 		}
 		else {
 			cmd->redir[1] = GREAT;
+			*i += 1;
+			parse_output(cmd, line, i);
 		}
-		*i += 1;
-		parse_output(cmd, line, i);
 	}
+	return (0);
 }
