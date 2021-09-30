@@ -76,5 +76,10 @@ int	parsing(t_cmds *cmd, char *line, char **env) {
 		}
 	}
 	free(i);
+	if (cmd->redir[0] == LESSLESS && !cmd->infile) {
+			g_exit = 258;
+			printf("minishell: syntax error near unexpected token '<'\n");
+			return (1);
+	}
 	return (0);
 }

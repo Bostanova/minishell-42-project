@@ -68,8 +68,6 @@ int	parse_redirect(t_cmds *cmd, char *line, int *i) {
 	}
 	else {
 		if (line[*i + 1] == '<') {
-			// cmd->redir[1] = SYNTAXERROR;
-			// *i += 1;
 			g_exit = 258;
 			printf("minishell: syntax error near unexpected token '<'\n");
 			return (1);

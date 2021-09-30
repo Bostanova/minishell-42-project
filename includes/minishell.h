@@ -26,10 +26,10 @@ int		g_exit;
 typedef struct s_cmds
 {
 	char			**env;
-	char			**args;		//args[0] - name of command, заканчивается на NULL
+	char			**args;
 	int				count_args;
 	int				pipe;
-	int				redir[2];	//redir[0] - in, redir[1] - out
+	int				redir[2];
 	char			*infile;
 	char			*outfile;
 	struct s_cmds	*next;
