@@ -1,7 +1,7 @@
 -Задачи:
 -bigSmile> kjdfg dmfjgkj dfg > jdhfb | jdh djhfg
 -kjdfg dmfjgkj dfg > jdhfb | jdh djhfg
--args[0] = kjdfg                        - сама команда
+-args[0] = kjdfg                - сама команда
 -args[1] = dmfjgkj              - аргументы
 -args[2] = dfg                  - аргументы
 -cmd->count_args:3

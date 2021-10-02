@@ -11,6 +11,7 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 #include "../libft/libft.h"
+#include "signal.h"
 
 #define PROMPT "minishell$ "
 #define TRUE 1
@@ -75,4 +76,10 @@ t_env	*delelem(t_env *lst, char *name);
 
 void print_arr(char **arr); //remove later,  it's for checking
 void print_lst(t_env *env);	//remove later,  it's for checking
+
+
+
+void	handler(pid_t pid);
+void	sigfunc(int signo);
+
 #endif

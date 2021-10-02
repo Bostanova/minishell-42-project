@@ -4,7 +4,7 @@ CC					:= 	gcc
 RM					:= 	rm -rf
 
 OFLAGS				:=	-O2 -g#-fsanitize=address
-CFLAGS				:= 	$(OFLAGS) -Wall #-Wextra #-Werror
+CFLAGS				:= 	$(OFLAGS) #-Wall #-Wextra #-Werror
 NORM				:= 	-R CheckForbiddenSourceHeader
 
 LIBFT_DIR			:= 	libft/
@@ -22,6 +22,7 @@ SRCS				:= 	minishell.c	$(SRCS_DIR)utils0.c \
 									$(SRCS_DIR)parse_env.c \
 									$(SRCS_DIR)parse_redirect.c\
 									$(SRCS_DIR)error_messages.c\
+									utils_5.c
 
 OBJS_DIR			:=	.objs/
 OBJS				:=	$(addprefix $(OBJS_DIR), $(notdir $(SRCS:%.c=%.o)))
@@ -44,12 +45,12 @@ clean:
 
 fclean:				clean
 					$(RM) $(NAME)
-					make fclean -C $(LIBFT_DIR)
+					@make fclean -C $(LIBFT_DIR)
 
 re:					fclean all
 
 libft_make:
-					@make -C $(LIBFT_DIR)
+					make -C $(LIBFT_DIR)
 
 norme:
 					norminette $(NORM) $(SRCS)*.c $(INCLUDES)*.h
@@ -64,6 +65,5 @@ gitpush_f:
 					git status
 					git commit -m "New edition"
 					git push origin feschall
-
 
 .PHONY:				all clean fclean re libft_make
