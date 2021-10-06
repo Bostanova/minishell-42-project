@@ -1,20 +1,28 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eerika <eerika@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/04 19:12:15 by eerika            #+#    #+#             */
+/*   Updated: 2021/10/04 19:12:16 by eerika           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/get_next_line.h"
 
-int		check_new_line(char *str)
+int	check_new_line(char *str)
 {
 	int			i;
 
 	i = 0;
 	if (!str)
-	{
 		return (0);
-	}
 	while (str[i] != '\0')
 	{
 		if (str[i] == '\n')
-		{
 			return (1);
-		}
 		i++;
 	}
 	return (0);
@@ -57,14 +65,10 @@ char	*copy_from_static(char *str)
 	if (!str)
 		return (0);
 	while (str[i] != '\0' && str[i] != '\n')
-	{
 		i++;
-	}
 	result = malloc(sizeof(char) * (i + 1));
 	if (result == NULL)
-	{
 		return (0);
-	}
 	i = 0;
 	while (str[i] != '\0' && str[i] != '\n')
 	{
@@ -75,7 +79,7 @@ char	*copy_from_static(char *str)
 	return (result);
 }
 
-int		get_next_line(int fd, char **line)
+int	get_next_line(int fd, char **line)
 {
 	static char	*stat_buf;
 	char		*buffer;
@@ -83,12 +87,12 @@ int		get_next_line(int fd, char **line)
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || !line)
 		return (-1);
-	if (!(buffer = malloc(BUFFER_SIZE + 1)))
-		return (-1);
+	buffer = malloc(BUFFER_SIZE + 1);
 	len_to_eof = 1;
 	while (!check_new_line(stat_buf) && len_to_eof != 0)
 	{
-		if ((len_to_eof = read(fd, buffer, BUFFER_SIZE)) == -1)
+		len_to_eof = read(fd, buffer, BUFFER_SIZE);
+		if (len_to_eof == -1)
 		{
 			free(buffer);
 			return (-1);

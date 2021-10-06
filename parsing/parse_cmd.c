@@ -1,13 +1,27 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_cmd.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eerika <eerika@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/04 18:19:14 by eerika            #+#    #+#             */
+/*   Updated: 2021/10/04 18:19:15 by eerika           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/minishell.h"
 
-int	is_new_arg(char c) {
+int	is_new_arg(char c)
+{
 	if (c == '<' || c == '>' || c == '|' || ft_isspace(c))
 		return (1);
 	else
 		return (0);
 }
 
-char	**global_alloc(char **arr, int size) {
+char	**global_alloc(char **arr, int size)
+{
 	char	**res;
 	int		i;
 
@@ -15,8 +29,10 @@ char	**global_alloc(char **arr, int size) {
 	if (!res)
 		ft_error(1);
 	i = 0;
-	if (arr) {
-		while (i < size - 1) {
+	if (arr)
+	{
+		while (i < size - 1)
+		{
 			res[i] = ft_strdup(arr[i]);
 			i++;
 		}
@@ -28,7 +44,8 @@ char	**global_alloc(char **arr, int size) {
 	return (res);
 }
 
-char	*add_char(char *str, char c) {
+char	*add_char(char *str, char c)
+{
 	char	*res;
 	int		j;
 
@@ -48,7 +65,8 @@ char	*add_char(char *str, char c) {
 	return (res);
 }
 
-static int	isinterpret(char c) {
+static int	isinterpret(char c)
+{
 	if (c == '\'' || c == '\"' || c == '<' \
 		|| c == '>' || c == '$' || c == '|' \
 		|| ft_isspace(c))
@@ -57,8 +75,10 @@ static int	isinterpret(char c) {
 		return (0);
 }
 
-void	parse_cmd(t_cmds *cmd, char *line, int *i) {
-	while(!isinterpret(line[*i]) && line[*i]) {
+void	parse_cmd(t_cmds *cmd, char *line, int *i)
+{
+	while(!isinterpret(line[*i]) && line[*i])
+	{
 		cmd->args[cmd->count_args] = add_char(cmd->args[cmd->count_args], line[*i]);
 		*i += 1;
 	}

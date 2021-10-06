@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eerika <eerika@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/04 19:13:07 by eerika            #+#    #+#             */
+/*   Updated: 2021/10/04 19:13:08 by eerika           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 
 /*   Allocates sufficient memory for a copy of the string s1, does the
@@ -8,7 +20,7 @@
 char	*ft_strdup(const char *s1)
 {
 	char	*res;
-	
+
 	res = (char *)ft_calloc(ft_strlen(s1) + 1, sizeof(char));
 	if (!res)
 		return (NULL);

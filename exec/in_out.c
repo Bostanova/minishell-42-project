@@ -47,9 +47,11 @@ void	here_doc(t_cmds *cmd)
 	}
 	else
 	{
-		close(fd[1]);
-		dup2(fd[0], STDIN_FILENO);
-		close(fd[0]);
+		if (cmd->args[0]) {
+			close(fd[1]);
+			dup2(fd[0], STDIN_FILENO);
+			close(fd[0]);	
+		}
 		wait(NULL);
 	}
 }
