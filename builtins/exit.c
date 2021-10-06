@@ -6,7 +6,7 @@
 /*   By: eerika <eerika@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 18:45:51 by eerika            #+#    #+#             */
-/*   Updated: 2021/10/04 19:23:41 by eerika           ###   ########.fr       */
+/*   Updated: 2021/10/06 10:44:41 by eerika           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	exit_with_value(t_cmds *cmd)
 	unsigned long	i;
 
 	i = 0;
+	if (cmd->args[1][i] == '-' && !cmd->args[1][i + 1])
+		error_exit(255, cmd->args[1]);
 	if (cmd->args[1][i] == '-' || cmd->args[1][i] == '+')
 		i++;
 	while (cmd->args[1][i])

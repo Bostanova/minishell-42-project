@@ -46,6 +46,6 @@ char	*test_path(char **path, char *cmd){
 		}	
 		i++;
 	}
-	error_cmd_not_found(127, cmd);
+	error_cmd_not_found(cmd);
 	return (NULL);
 }

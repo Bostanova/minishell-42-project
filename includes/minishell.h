@@ -6,7 +6,7 @@
 /*   By: eerika <eerika@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 19:22:29 by eerika            #+#    #+#             */
-/*   Updated: 2021/10/05 19:30:46 by eerika           ###   ########.fr       */
+/*   Updated: 2021/10/06 10:56:30 by eerika           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@
 # define LESSLESS 4
 # define SYNTAXERROR -1
 
-int		g_exit;
+int	g_exit;
 
 typedef struct s_cmds
 {
@@ -76,7 +76,7 @@ void	error_export(int nbr, char *err);
 void	exit_cmd(t_cmds *cmd);
 void	error_exit(int nbr, char *err);
 void	execution(t_cmds *cmd, char ***env);
-void	error_cmd_not_found(int nbr, char *err);
+void	error_cmd_not_found(char *err);
 void	error_open_file(int nbr, char *err);
 char	*test_path(char **path, char *cmd);
 char	**get_path(char **env);

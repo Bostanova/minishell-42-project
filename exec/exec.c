@@ -113,6 +113,7 @@ void	execution(t_cmds *cmd, char ***env){
 	stdin_initial = dup(STDIN_FILENO);
 	tmp = NULL;
 	path = NULL;
+	isbuildin = 0;
 	while (cmd != NULL) {
 		if (cmd->args[0]) {
 			isbuildin = check_buildin(cmd->args[0]);
