@@ -6,7 +6,7 @@
 /*   By: eerika <eerika@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 18:31:54 by eerika            #+#    #+#             */
-/*   Updated: 2021/10/04 18:44:14 by eerika           ###   ########.fr       */
+/*   Updated: 2021/10/07 15:10:03 by eerika           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,13 +97,17 @@ void	cd_cmd(t_cmds *cmd, char ***env)
 		chdir(cmd->args[1]);
 		pwd = getcwd(NULL, 0);
 		change_env_pwd(env, pwd, oldpwd);
+		g_exit = 0;
 		if (pwd)
 			free(pwd);
 	}
 	else
 	{
 		if (errno)
+		{
+			g_exit = 1;
 			printf ("minishell: cd: %s\n", strerror(errno));
+		}
 	}
 	if (oldpwd)
 		free(oldpwd);

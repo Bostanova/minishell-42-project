@@ -5,7 +5,10 @@ void	error_cmd_not_found(char *err)
 	g_exit = 127;
 	write(STDOUT_FILENO, "minishell: ", 12);
 	write(STDOUT_FILENO, err, ft_strlen(err) + 1);
-	write(STDOUT_FILENO, ": command not found\n", 21);
+	if (err[0] == '/' || err[0] == '.')
+		write(STDOUT_FILENO, ": No such file or directory\n", 29);
+	else
+		write(STDOUT_FILENO, ": command not found\n", 21);
 }
 
 void	error_open_file(int nbr, char *err)

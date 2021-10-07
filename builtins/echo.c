@@ -6,7 +6,7 @@
 /*   By: eerika <eerika@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 18:44:36 by eerika            #+#    #+#             */
-/*   Updated: 2021/10/04 18:45:19 by eerika           ###   ########.fr       */
+/*   Updated: 2021/10/07 14:51:25 by eerika           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,5 @@ void	echo_cmd(t_cmds *cmd)
 		if (ft_strcmp(cmd->args[1], "-n"))
 			write(STDOUT_FILENO, "\n", 1);
 	}
+	g_exit = 0;
 }

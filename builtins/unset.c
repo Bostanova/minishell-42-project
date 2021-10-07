@@ -6,7 +6,7 @@
 /*   By: eerika <eerika@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 18:50:28 by eerika            #+#    #+#             */
-/*   Updated: 2021/10/04 18:50:55 by eerika           ###   ########.fr       */
+/*   Updated: 2021/10/07 15:05:36 by eerika           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,9 +87,15 @@ void	unset_cmd(t_cmds *cmd, char ***env)
 		if (cmd->args[i][0] == '=' || ft_isdigit(cmd->args[i][0]))
 			error_unset(1, cmd->args[i]);
 		else if (ft_strchr(cmd->args[i], '='))
+		{
+			g_exit = 0;
 			del_env_with_value(env, cmd->args[i]);
+		}
 		else
+		{
+			g_exit = 0;
 			del_env(env, cmd->args[i]);
+		}
 		i++;
 	}
 }

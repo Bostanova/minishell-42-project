@@ -6,7 +6,7 @@
 /*   By: eerika <eerika@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 19:22:29 by eerika            #+#    #+#             */
-/*   Updated: 2021/10/06 10:56:30 by eerika           ###   ########.fr       */
+/*   Updated: 2021/10/07 14:59:09 by eerika           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	unset_cmd(t_cmds *cmd, char ***env);
 void	error_unset(int nbr, char *err);
 void	echo_cmd(t_cmds *cmd);
 void	export_cmd(t_cmds *cmd, char ***env);
-void	error_export(int nbr, char *err);
+void	error_export(char *err);
 void	exit_cmd(t_cmds *cmd);
 void	error_exit(int nbr, char *err);
 void	execution(t_cmds *cmd, char ***env);
@@ -90,6 +90,8 @@ void	error(int error);
 void	handle_signals(void);
 void	ignore_signals(void);
 void	child_signals(int status);
+void 	rl_replace_line();
+void	handle_signals_heredoc(void);
 
 void print_arr(char **arr); //remove later,  it's for checking
 void print_cmd(t_cmds *cmd);

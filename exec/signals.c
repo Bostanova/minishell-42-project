@@ -2,22 +2,27 @@
 
 static void	sigint(int sig)
 {
-	write(0, "\b\b  \b\b", 6);
-	write(0, "\n", 1);
-	write(1, PROMPT, ft_strlen(PROMPT));
+	// printf("\033[2D");
+	printf("\n"); 
+	rl_on_new_line(); // Regenerate the prompt on a newline
+	rl_replace_line("", 0); // Clear the previous text
+	rl_redisplay();
 	g_exit = 1;
 }
 
 static void	sigquit(int sig)
 {
-	write(0, "\b\b  \b\b", 6);
+	// write(1, "\b\b \b\b", 6);
+	// printf("\033[2D");
+    rl_on_new_line();
+    rl_redisplay();
 	g_exit = 0;
 }
 
 void	handle_signals(void)
 {
+	signal(SIGQUIT, sigquit); 	/* ctrl-\ do nothing	*/
 	signal(SIGINT, sigint); 	/* ctrl-C print a new prompt on a newline	*/
-	signal(SIGQUIT, sigquit); 	/* ctrl-\ do nothing						*/
 }
 
 void	ignore_signals(void)

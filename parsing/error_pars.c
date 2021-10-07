@@ -6,15 +6,15 @@
 /*   By: eerika <eerika@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 18:30:32 by eerika            #+#    #+#             */
-/*   Updated: 2021/10/04 18:30:33 by eerika           ###   ########.fr       */
+/*   Updated: 2021/10/07 14:58:54 by eerika           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	error_export(int nbr, char *err)
+void	error_export(char *err)
 {
-	g_exit = nbr;
+	// g_exit = nbr;
 	write(STDOUT_FILENO, "minishell: export: ", 20);
 	write(STDOUT_FILENO, err, ft_strlen(err) + 1);
 	write(STDOUT_FILENO, ": not a valid identifier\n", 26);

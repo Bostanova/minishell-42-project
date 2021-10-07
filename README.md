@@ -1,22 +1,18 @@
-gcc -g *.c parsing/*.c builtins/*.c exec/*.c  libft/*.c -lreadline -o minishell
+brew install readline
+
+gcc -g *.c parsing/*.c builtins/*.c exec/*.c  libft/*.c -lreadline -L/Users/eerika/.brew/Cellar/readline/8.1.1/lib/ -I/Users/eerika/.brew/Cellar/readline/8.1.1/include -o minishell
 
 valgrind --trace-children=yes ./minishell
 
 lsof -c minishell
 
-
 Fix it:
 
-env | grep HOME - Binary file (standard input) matches
+unset ""
 
-unset "" a
-unset a "" "" asd 123 "" 
+env | grep HOME
 
-<< EOF - segfault
-<< EOF | wc -l
+ctrl+c - убрать ^C
+ctrl+\ - убрать ^\
 
-/binn/ls - выдает неправильное сообщение об ошибке и код выхода
-"$?", "Export "111"="222""  - непр код выхода 
-
-ctrl+c - указывает не весь PROMPT
-ctrl+d - segfault
+параллельное выполнение

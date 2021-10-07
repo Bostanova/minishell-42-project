@@ -121,6 +121,14 @@ void	execution(t_cmds *cmd, char ***env){
 				path = get_path(*env);
 				tmp = cmd->args[0];
 				cmd->args[0] = test_path(path, cmd->args[0]);
+				if (g_exit == 127)
+				{
+					if (path)
+						free_arr(path);
+					if (tmp)
+						free(tmp);
+					break;
+				}
 			}
 		}
 		open_files(cmd, &in_out[0], &in_out[1]);

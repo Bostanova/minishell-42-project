@@ -37,6 +37,12 @@ void print_cmd(t_cmds *cmd) {
 	}
 }
 
+static void	catch_exit_sig(void)
+{
+	write(1, "exit\n", 5);
+	exit(0);
+}
+
 int	main(int argc, char **argv, char **envp) {
 	char	*line;
 	char	**env;
@@ -52,18 +58,22 @@ int	main(int argc, char **argv, char **envp) {
 	{
 		cmd = init_cmd(env);
 		line = rl_gets();
-		if (!(parsing(cmd, line, env))){
+		if (!line)
+			catch_exit_sig();
+		if (!(parsing(cmd, line, env)))
+		{
 			// print_cmd(cmd);
 			execution(cmd, &env);
 		}
+			
 		if (line)
 			free(line);
 		free_cmd(cmd);
+		// system("leaks minishell");
 	}
 	clear_history();
 	free_arr(env);
 
-	system("leaks minishell");
 	// export MallocStackLogging=1  - in bash
 	return (0);
 }

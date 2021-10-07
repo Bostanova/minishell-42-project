@@ -6,7 +6,7 @@
 /*   By: eerika <eerika@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 17:36:29 by eerika            #+#    #+#             */
-/*   Updated: 2021/10/05 13:46:28 by eerika           ###   ########.fr       */
+/*   Updated: 2021/10/06 14:58:23 by eerika           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,33 @@ static void	count_args(char *line, t_cmds *cmd, int *i)
 	{
 		if (cmd->args[cmd->count_args])
 			cmd->count_args += 1;
+	}
+}
+
+void check_grep(t_cmds *cmd)
+{
+	int i;
+
+	i = 0;
+	if (cmd)
+	{
+		while (cmd)
+		{
+			if (cmd->args[0] && !ft_strcmp(cmd->args[0], "grep"))
+			{
+				char **tmp = (char **)malloc(sizeof(char *) * (cmd->count_args + 2));
+				while (cmd->args[i])
+				{
+					tmp[i] = ft_strdup(cmd->args[i]);
+					i++;
+				}
+				tmp[i] = ft_strdup("-a");
+				tmp[i + 1] = NULL;
+				free_arr(cmd->args);
+				cmd->args = tmp;
+			}
+			cmd = cmd->next;
+		}
 	}
 }
 
@@ -60,6 +87,7 @@ int	parsing(t_cmds *cmd, char *line, char **env)
 		count_args(line, cmd, i);
 	}
 	free(i);
+	check_grep(cmd);
 	if (cmd->redir[0] == LESSLESS && !cmd->infile)
 	{
 		g_exit = 258;
