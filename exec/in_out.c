@@ -32,25 +32,35 @@ void	here_doc(t_cmds *cmd)
 	pid_t	pid;
 	int		fd[2];
 	char	*line;
+	int		status;
+	int		reader;
 
 	pipe(fd);
 	pid = fork();
 	if (pid == 0)
 	{
+		ignore_signals();
+		handle_signals_heredoc();
 		close(fd[0]);
-		while (get_line(&line))
+		while ((reader = get_line(&line)))
 		{
 			if (ft_strncmp(line, cmd->infile, ft_strlen(cmd->infile)) == 0)
 				exit(EXIT_SUCCESS);
 			write(fd[1], line, ft_strlen(line));
 		}
+		if (!reader)
+			exit(0);
 	}
 	else
 	{
-		close(fd[1]);
-		dup2(fd[0], STDIN_FILENO);
-		close(fd[0]);
+		ignore_signals();
 		wait(NULL);
+		handle_signals();
+		if (cmd->args[0]) {
+			close(fd[1]);
+			dup2(fd[0], STDIN_FILENO);
+			close(fd[0]);	
+		}
 	}
 }
 

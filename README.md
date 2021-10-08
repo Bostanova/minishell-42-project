@@ -1,24 +1,18 @@
-gcc -g *.c parsing/*.c builtins/*.c libft/*.c -lreadline -o minishell
+brew install readline
 
-Задачи:
-0. Прогнать по чек-листу :)
-1. 	Обработка команды "$?"
-	Вписать в parse_env.c 
-2. Обработка ошибок, заполнение g_exit: 
-	- при синтаксической ошибке в редиректах cmd.redir[n] = -1,
-	напр: "ls><file"
-	- все malloc
-	- ...
+gcc -g *.c parsing/*.c builtins/*.c exec/*.c  libft/*.c -lreadline -L/Users/eerika/.brew/Cellar/readline/8.1.1/lib/ -I/Users/eerika/.brew/Cellar/readline/8.1.1/include -o minishell
 
+valgrind --trace-children=yes ./minishell
 
-Для Ахмеда:
-1. cmd заканчивается на null
-2. env и cmd.args заканчиваются на null
-3. все переменные типа char*  - нуль-терминированные строки
-4. Билтины:
-	- все билтины ничего не возвращают
-	- pwd ничего не принимает
-	- env принимает структуру cmd
-	- cd принимает структуру cmd и массив env(объявлен и заполнен 	в main)
-	- 
+lsof -c minishell
 
+Fix it:
+
+unset ""
+
+env | grep HOME
+
+ctrl+c - убрать ^C
+ctrl+\ - убрать ^\
+
+параллельное выполнение

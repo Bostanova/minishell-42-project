@@ -1,22 +1,36 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils0.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eerika <eerika@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/04 17:32:33 by eerika            #+#    #+#             */
+/*   Updated: 2021/10/04 17:54:51 by eerika           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/minishell.h"
 
 /* Read a string, and return a pointer to it.  Returns NULL on EOF. */
-char	*rl_gets (void) {
-	char *line;
-	
-	line = (char *)NULL;
-  	if (line)
+char	*rl_gets(void)
+{
+	char	*line;
+
+	line = (char *) NULL;
+	if (line)
 	{
 		free (line);
-		line = (char *)NULL;
+		line = (char *) NULL;
 	}
 	line = readline (PROMPT);
-	if (line && *line) 
+	if (line && *line)
 		add_history (line);
 	return (line);
 }
 
-t_cmds	*init_cmd(t_env *env) {
+t_cmds	*init_cmd(char **env)
+{
 	t_cmds	*cmd;
 
 	cmd = (t_cmds *)malloc(sizeof(t_cmds));
@@ -34,70 +48,65 @@ t_cmds	*init_cmd(t_env *env) {
 	return (cmd);
 }
 
-t_env *delelem(t_env *lst, char *name)
+char	**get_array_of_env(char **envp)
 {
-	t_env	*tmp;
-	t_env	*head;
-
-	if (!(ft_strcmp(lst->name, name))) {
-		tmp = lst;
-		lst = lst->next;
-		free(tmp->data);
-		free(tmp->name);
-		free(tmp);
-		return (lst);
-	}
-	head = lst;
-	while(lst) {
-		if (!(ft_strcmp(lst->next->name, name)))
-		{
-			tmp = lst->next;
-			lst->next = lst->next->next;
-			free(tmp->data);
-			free(tmp->name);
-			free(tmp);
-			return (head);
-		}
-		lst = lst->next;
-	}
-	return(head);
-}
-
-t_env *addelem(t_env *lst, char *name, char *data)
-{
-	t_env	*new_node;
-
-	new_node = (t_env *)malloc(sizeof(t_env));
-	while(lst && lst->next)
-		 lst = lst->next;
-	lst->next = new_node;
-	new_node->name = ft_strdup(name);
-	new_node->data = ft_strdup(data);
-	new_node->next = NULL;
-	return(new_node);
-}
-
-t_env	*get_array_of_env(char **envp) {
-	t_env *res;
-	t_env *head;
-	char **tmp;
+	char	**res;
 	int		i;
 
+	res = NULL;
 	i = 0;
-	res = (t_env *)malloc(sizeof(t_env));
-	tmp = ft_split(envp[i], '=');
-	res->name = ft_strdup(tmp[0]);
-	res->data = ft_strdup(tmp[1]);
-	res->next = NULL;
-	head = res;
-	free_arr(tmp);
-	i = 1;
-	while (envp[i]) {
-		tmp = ft_split(envp[i], '=');
-		addelem(res, tmp[0], tmp[1]);
+	while (envp[i])
 		i++;
-		free_arr(tmp);
+	res = (char **)malloc(sizeof(char *) * i + 1);
+	res[i] = NULL;
+	i = 0;
+	while (envp[i])
+	{
+		res[i] = ft_strdup(envp[i]);
+		i++;
 	}
-	res = head;
 	return (res);
+}
+
+void	free_arr(char **arr)
+{
+	int	i;
+
+	i = 0;
+	if (arr)
+	{
+		while (arr[i])
+		{
+			free(arr[i]);
+			i++;
+		}
+	}
+	free(arr);
+}
+
+void	free_cmd(t_cmds *cmd)
+{
+	int		i;
+	t_cmds	*tmp;
+
+	while (cmd)
+	{
+		tmp = cmd->next;
+		i = 0;
+		if (cmd->args)
+		{
+			while (i < cmd->count_args)
+			{
+				free(cmd->args[i]);
+				i++;
+			}
+			free(cmd->args);
+		}
+		if (cmd->infile)
+			free(cmd->infile);
+		if (cmd->outfile)
+			free(cmd->outfile);
+		free(cmd);
+		cmd = tmp;
+	}
 }

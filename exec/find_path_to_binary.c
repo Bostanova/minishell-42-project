@@ -13,12 +13,15 @@ char	**get_path(char **env)
 			path = ft_split(env[i], ':');
 		i++;
 	}
-	path[0] = ft_copy(path[0], 5);
-	i = 0;
-	while (path[i])
+	if (path)
 	{
-		path[i] = ft_join(path[i], "/");
-		i++;
+		path[0] = ft_copy(path[0], 5);
+		i = 0;
+		while (path[i])
+		{
+			path[i] = ft_join(path[i], "/");
+			i++;
+		}
 	}
 	return (path);
 }
@@ -46,6 +49,6 @@ char	*test_path(char **path, char *cmd){
 		}	
 		i++;
 	}
-	error_cmd_not_found(127, cmd);
+	error_cmd_not_found(cmd);
 	return (NULL);
 }

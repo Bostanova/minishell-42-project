@@ -1,49 +1,48 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils1.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eerika <eerika@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/04 18:51:55 by eerika            #+#    #+#             */
+/*   Updated: 2021/10/04 18:51:57 by eerika           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/minishell.h"
 
-void	free_arr(char **arr) {
-	int i;
-	
-	i = 0;
-	if (arr) {
-		while (arr[i]) {
-			free(arr[i]);
-			i++;
-		}
-	}
-	free(arr);
+static int	stop_char(char c)
+{
+	if ((c >= '!' && c <= ';') || c == '=')
+		return (1);
+	else if (c >= '?' && c <= '{')
+		return (1);
+	else if (c >= '}' && c <= '~')
+		return (1);
+	return (0);
 }
 
-void	free_cmd(t_cmds *cmd) {
-	int 	i;
-	t_cmds *tmp;
-
-	while (cmd) {
-		tmp = cmd->next;
-		i = 0;
-		if (cmd->args) {
-			while (i < cmd->count_args) {
-			free(cmd->args[i]);
-			i++;
-			}
-		free(cmd->args);
-		}
+void	alloc_new_arg(t_cmds *cmd, char *line, int *i)
+{
+	if (*i == 0 || (cmd->count_args == 0 && !cmd->args))
+		cmd->args = global_alloc(cmd->args, 1);
+	else if (ft_isspace(line[*i - 1]) && stop_char(line[*i]))
+		cmd->args = global_alloc(cmd->args, (1 + cmd->count_args));
+	else if (line[*i] == '<')
+	{
 		if (cmd->infile)
+		{
 			free(cmd->infile);
-		if (cmd->outfile)
-			free(cmd->outfile);
-		free(cmd);
-		cmd = tmp;
+			cmd->infile = NULL;
+		}
 	}
-}
-
-void	free_env(t_env *env) {
-	t_env *tmp;
-
-	while (env) {
-		tmp = env->next;
-		free(env->data);
-		free(env->name);
-		free(env);
-		env = tmp;
+	else if (line[*i] == '>')
+	{
+		if (cmd->outfile)
+		{
+			free(cmd->outfile);
+			cmd->outfile = NULL;
+		}
 	}
 }

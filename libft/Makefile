@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: eerika <eerika@student.42.fr>              +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2021/10/04 19:17:51 by eerika            #+#    #+#              #
+#    Updated: 2021/10/04 19:19:32 by eerika           ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 FLAG = -Wall -Wextra -Werror
 
 NAME = libft.a
@@ -23,7 +35,7 @@ OBJ 		= $(SRC:.c=.o)
 
 BONUS		=	ft_lstnew.c ft_lstsize.c ft_lstlast.c \
 				ft_lstadd_front.c ft_lstadd_back.c ft_lstdelone.c \
-				ft_lstclear.c ft_lstiter.c ft_lstmap.c 
+				ft_lstclear.c ft_lstiter.c
 
 BONUS_OBJ	= $(BONUS:.c=.o)
 
