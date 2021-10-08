@@ -71,7 +71,7 @@ int	main(int argc, char **argv, char **envp) {
 		if (line)
 			free(line);
 		free_cmd(cmd);
-		// system("leaks minishell");
+		system("leaks minishell");
 	}
 	clear_history();
 	free_arr(env);
