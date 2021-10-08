@@ -6,7 +6,7 @@
 /*   By: eerika <eerika@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 18:47:11 by eerika            #+#    #+#             */
-/*   Updated: 2021/10/07 15:00:49 by eerika           ###   ########.fr       */
+/*   Updated: 2021/10/08 17:11:51 by eerika           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,12 +78,9 @@ void	add_env(char ***env, char *str, int size)
 	res = (char **)malloc(sizeof(char *) * (size + 1));
 	if (!res)
 		ft_error(1);
-	i = 0;
-	while ((*env)[i])
-	{
+	i = -1;
+	while ((*env)[++i])
 		res[i] = ft_strdup((*env)[i]);
-		i++;
-	}
 	res[i] = ft_strdup(str);
 	res[i + 1] = NULL;
 	free_env(env);
@@ -100,12 +97,11 @@ void	change_env(char ***env, char *str)
 	size_cmp = 0;
 	while (str[size_cmp] != '=')
 		size_cmp++;
-	size_cmp++;
 	i = 0;
 	sign = 0;
 	while ((*env)[i])
 	{
-		if (!(ft_strncmp((*env)[i], str, size_cmp)))
+		if (!(ft_strncmp((*env)[i], str, size_cmp + 1)))
 		{
 			tmp = ft_strdup(str);
 			free((*env)[i]);
@@ -128,7 +124,6 @@ void	export_cmd(t_cmds *cmd, char ***env)
 		printing(*env);
 		g_exit = 0;
 	}
-		
 	else
 	{
 		while (cmd->args[i] && ft_strchr(cmd->args[i], '='))
@@ -138,13 +133,11 @@ void	export_cmd(t_cmds *cmd, char ***env)
 				g_exit = 1;
 				error_export(cmd->args[i]);
 			}
-				
 			else
 			{
 				change_env(env, cmd->args[i]);
 				g_exit = 0;
 			}
-				
 			i++;
 		}
 	}
