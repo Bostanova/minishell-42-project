@@ -65,7 +65,7 @@ int	main(int argc, char **argv, char **envp) {
 			// print_cmd(cmd);
 			execution(cmd, &env);
 		}
-			
+		
 		if (line)
 			free(line);
 		free_cmd(cmd);

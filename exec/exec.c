@@ -119,16 +119,17 @@ void	execution(t_cmds *cmd, char ***env){
 			isbuildin = check_buildin(cmd->args[0]);
 			if (!isbuildin && (access(cmd->args[0], X_OK))) {
 				path = get_path(*env);
-				tmp = cmd->args[0];
-				cmd->args[0] = test_path(path, cmd->args[0]);
-				if (g_exit == 127)
+				if (!path)
 				{
+					error_cmd_not_found(cmd->args[0]);
 					if (path)
 						free_arr(path);
 					if (tmp)
 						free(tmp);
 					break;
 				}
+				tmp = cmd->args[0];
+				cmd->args[0] = test_path(path, cmd->args[0]);
 			}
 		}
 		open_files(cmd, &in_out[0], &in_out[1]);

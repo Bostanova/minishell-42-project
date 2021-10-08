@@ -3,7 +3,7 @@
 static void	sigint(int sig)
 {
 	// printf("\033[2D");
-	printf("\n"); 
+	printf("\n");
 	rl_on_new_line(); // Regenerate the prompt on a newline
 	rl_replace_line("", 0); // Clear the previous text
 	rl_redisplay();
@@ -12,8 +12,8 @@ static void	sigint(int sig)
 
 static void	sigquit(int sig)
 {
-	// write(1, "\b\b \b\b", 6);
-	// printf("\033[2D");
+	// write(1, "\b\b", 3);
+	printf("\033[2D");
     rl_on_new_line();
     rl_redisplay();
 	g_exit = 0;
