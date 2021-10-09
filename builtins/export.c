@@ -6,7 +6,7 @@
 /*   By: eerika <eerika@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 18:47:11 by eerika            #+#    #+#             */
-/*   Updated: 2021/10/08 17:11:51 by eerika           ###   ########.fr       */
+/*   Updated: 2021/10/09 11:46:10 by eerika           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,7 @@ void	export_cmd(t_cmds *cmd, char ***env)
 	}
 	else
 	{
-		while (cmd->args[i] && ft_strchr(cmd->args[i], '='))
+		while (cmd->args[i])
 		{
 			if (cmd->args[i][0] == '=' || ft_isdigit(cmd->args[i][0]))
 			{
