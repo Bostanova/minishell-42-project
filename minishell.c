@@ -39,7 +39,9 @@ void print_cmd(t_cmds *cmd) {
 
 static void	catch_exit_sig(void)
 {
-	write(1, "exit\n", 5);
+	rl_on_new_line();
+    rl_redisplay();
+	write(1, "\033[Aexit\n", 9);
 	exit(0);
 }
 
@@ -69,7 +71,7 @@ int	main(int argc, char **argv, char **envp) {
 		if (line)
 			free(line);
 		free_cmd(cmd);
-		// system("leaks minishell");
+		system("leaks minishell");
 	}
 	clear_history();
 	free_arr(env);

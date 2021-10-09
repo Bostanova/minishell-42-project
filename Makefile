@@ -3,8 +3,9 @@ NAME				:= 	minishell
 CC					:= 	gcc
 RM					:= 	rm -rf
 
-OFLAGS				:=	-O2 -g -lreadline -L/Users/${USER}/.brew/Cellar/readline/8.1.1/lib/ -I/Users/${USER}/.brew/Cellar/readline/8.1.1/include #-fsanitize=address
-CFLAGS				:= 	$(OFLAGS) -Wall #-Wextra #-Werror
+RFLAGS				:=	-lreadline -L/Users/${USER}/.brew/Cellar/readline/8.1.1/lib/ -I/Users/${USER}/.brew/Cellar/readline/8.1.1/include
+OFLAGS				:=	-O2 -g #-fsanitize=address
+CFLAGS				:= 	$(OFLAGS) #-Wall -Wextra -Werror
 NORM				:= 	-R CheckForbiddenSourceHeader
 
 LIBFT_DIR			:= 	libft/
@@ -13,27 +14,20 @@ LIBFT				:= 	$(LIBFT_DIR)libft.a
 INCLUDES			:= 	includes/
 HEADER				:= 	$(INCLUDES)*.h
 
-SRCS_DIR			= 	parsing/ 
-SRCS				:= 	minishell.c	utils0.c \
-									utils1.c \
-									parsing.c \
-									parse_cmd.c \
-									parse_quotes.c \
-									parse_env.c \
-									parse_redirect.c\
-									error_pars.c\
-
-
+VPATH				=	$(SRCS_DIRS)
+SRCS_DIRS			=	builtins/	exec/	parsing/
+SRCS				:= 	minishell.c	\
+						cd.c	echo.c	env.c	exit.c	export.c	pwd.c	unset.c	\
+						buildins.c	find_path_to_binary.c	signals_heredoc.c	error_exec.c	in_out.c	exec.c	signals.c	\
+						error_pars.c	parse_env.c	parse_redirect.c	utils0.c	parse_cmd.c	parse_quotes.c	parsing.c	utils1.c
 
 OBJS_DIR			:=	.objs/
 OBJS				:=	$(addprefix $(OBJS_DIR), $(notdir $(SRCS:%.c=%.o)))
 
-VPATH				=	$(SRCS_DIR) exec/ builtins/
-
 all:				libft_make $(NAME)
 
 $(NAME):			$(OBJS_DIR) $(OBJS) $(LIBFT) Makefile
-					$(CC) $(CFLAGS) -lreadline $(LIBFT) $(OBJS) -o $@
+					$(CC) $(CFLAGS) $(RFLAGS) $(LIBFT) $(OBJS) -o $@
 
 $(OBJS_DIR)%.o:		%.c $(HEADER)
 					$(CC) $(CFLAGS) -I $(INCLUDES) -c $< -o $@
@@ -55,17 +49,11 @@ libft_make:
 
 norme:
 					norminette $(NORM) $(SRCS)*.c $(INCLUDES)*.h
-gitpush_e:
-					git branch eerika
-					git add .
-					git commit -m "New edition"
-					git push origin eerika
-gitpush_f:
+gitpush:
 					git status
 					git add .
 					git status
 					git commit -m "New edition"
-					git push origin feschall
-
+					git push origin ${USER}
 
 .PHONY:				all clean fclean re libft_make

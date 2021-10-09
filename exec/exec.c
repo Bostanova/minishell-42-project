@@ -53,8 +53,7 @@ void	exec_last_cmd(t_cmds *cmd, char ***env, int stdin_initial)
 				error(1);
 				exit(WTERMSIG(status));
 			}
-		}
-			
+		}	
 	}
 	else {
 		ignore_signals();
@@ -87,8 +86,7 @@ void	write_outfile(t_cmds *cmd, int outfile_fd, char ***env, int stdin_initial)
 				error(1);
 				exit(WTERMSIG(status));
 			}
-		}
-			
+		}	
 	}
 	else {
 		ignore_signals();
@@ -101,6 +99,14 @@ void	write_outfile(t_cmds *cmd, int outfile_fd, char ***env, int stdin_initial)
 		if (stdin_initial != STDIN_FILENO)
 			dup2(stdin_initial, STDIN_FILENO);
 	}
+}
+
+void foo(char **arr, char *str)
+{
+	if (arr)
+		free_arr(arr);
+	if (str)
+		free(str);
 }
 
 void	execution(t_cmds *cmd, char ***env){
@@ -122,10 +128,7 @@ void	execution(t_cmds *cmd, char ***env){
 				if (!path)
 				{
 					error_cmd_not_found(cmd->args[0]);
-					if (path)
-						free_arr(path);
-					if (tmp)
-						free(tmp);
+					foo(path, tmp);
 					break;
 				}
 				tmp = cmd->args[0];
@@ -143,12 +146,8 @@ void	execution(t_cmds *cmd, char ***env){
 			else
 				exec_cmd(cmd, isbuildin, env);
 		}
-		if (!isbuildin) {
-			if (path)
-				free_arr(path);
-			if (tmp)
-				free(tmp);
-		}
+		if (!isbuildin)
+			foo(path, tmp);
 		cmd = cmd->next;
 	}
 }

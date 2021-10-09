@@ -6,7 +6,7 @@
 #    By: eerika <eerika@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/04 19:17:51 by eerika            #+#    #+#              #
-#    Updated: 2021/10/04 19:19:32 by eerika           ###   ########.fr        #
+#    Updated: 2021/10/08 10:59:57 by eerika           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ SRC 		=	ft_isdigit.c ft_islower.c ft_isupper.c ft_isalpha.c \
 				ft_memchr.c ft_memcmp.c \
 				ft_calloc.c ft_realloc.c\
 				ft_itoa.c ft_atoi.c get_next_line.c ft_split.c \
-				ft_join.c ft_split_with_spaces.c ft_strscpy.c
+				ft_join.c ft_split_with_spaces.c ft_strscpy.c ft_copy.c
 		
 OBJ 		= $(SRC:.c=.o)
 
