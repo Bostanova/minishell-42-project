@@ -10,6 +10,4 @@ Fix it:
 
 unset ""
 
-env | grep HOME
-
 параллельное выполнение

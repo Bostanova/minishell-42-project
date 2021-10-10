@@ -7,8 +7,7 @@ void	pwd_cmd(void)
 	current_dir = getcwd(NULL, 0);
 	if (current_dir)
 	{
-		write(STDOUT_FILENO, current_dir, ft_strlen(current_dir) + 1);
-		write(STDOUT_FILENO, "\n", 1);
+		printf("%s\n", current_dir);
 		free(current_dir);
 		g_exit = 0;	
 	}

@@ -34,11 +34,13 @@ void	ignore_signals(void)
 void	child_signals(int status)
 {
 	if (WTERMSIG(status) == 2)
-		g_exit = 130;
+		{
+			g_exit = 130;
+			write(1, "\n", 1);
+		}
 	if (WTERMSIG(status) == 3)
 	{
-		write(1, " \bQuit: 3", 10);
+		write(1, " \bQuit: 3\n", 10);
 		g_exit = 131;
 	}
-	write(1, "\n", 1);
 }

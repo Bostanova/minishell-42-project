@@ -6,7 +6,7 @@
 /*   By: eerika <eerika@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 18:50:28 by eerika            #+#    #+#             */
-/*   Updated: 2021/10/08 11:34:29 by eerika           ###   ########.fr       */
+/*   Updated: 2021/10/09 16:45:20 by eerika           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,14 @@ void	del_env(char ***env, char *str)
 	h = 0;
 	index = 0;
 	tmp = ft_strdup(str);
-	tmp = ft_join(tmp, "=");
+	// tmp = ft_join(tmp, "=");
 	while ((*env)[h])
 	{
 		if (!(ft_strncmp((*env)[h], tmp, ft_strlen(tmp))))
+		{
 			index = h;
+			printf("%d\n", index);
+		}	
 		h++;
 	}
 	free(tmp);
