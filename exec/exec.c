@@ -6,7 +6,7 @@
 /*   By: eerika <eerika@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 17:25:27 by eerika            #+#    #+#             */
-/*   Updated: 2021/10/11 18:19:49 by eerika           ###   ########.fr       */
+/*   Updated: 2021/10/11 18:56:39 by eerika           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,11 @@ static void	sig_proc(t_cmds *cmd)
 		handle_signals();
 		j++;
 	}
+}
+
+void	foo()
+{
+	
 }
 
 void	execution(t_cmds *cmd, char ***env)
