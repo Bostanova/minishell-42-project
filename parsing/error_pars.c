@@ -6,7 +6,7 @@
 /*   By: eerika <eerika@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 18:30:32 by eerika            #+#    #+#             */
-/*   Updated: 2021/10/08 17:26:07 by eerika           ###   ########.fr       */
+/*   Updated: 2021/10/09 11:43:32 by eerika           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	error_export(char *err)
 {
-	write(STDOUT_FILENO, "minishell: export: ", 20);
+	write(STDOUT_FILENO, "minishell: export: `", 20);
 	write(STDOUT_FILENO, err, ft_strlen(err) + 1);
-	write(STDOUT_FILENO, ": not a valid identifier\n", 26);
+	write(STDOUT_FILENO, "': not a valid identifier\n", 26);
 }
 
 void	error_unset(int nbr, char *err)

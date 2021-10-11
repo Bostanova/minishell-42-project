@@ -6,7 +6,7 @@
 /*   By: eerika <eerika@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 18:47:11 by eerika            #+#    #+#             */
-/*   Updated: 2021/10/08 17:11:51 by eerika           ###   ########.fr       */
+/*   Updated: 2021/10/11 12:07:39 by eerika           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void	change_env(char ***env, char *str)
 	char	*tmp;
 
 	size_cmp = 0;
-	while (str[size_cmp] != '=')
+	while (str[size_cmp] && str[size_cmp] != '=')
 		size_cmp++;
 	i = 0;
 	sign = 0;
@@ -126,7 +126,7 @@ void	export_cmd(t_cmds *cmd, char ***env)
 	}
 	else
 	{
-		while (cmd->args[i] && ft_strchr(cmd->args[i], '='))
+		while (cmd->args[i])
 		{
 			if (cmd->args[i][0] == '=' || ft_isdigit(cmd->args[i][0]))
 			{

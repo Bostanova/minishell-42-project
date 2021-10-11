@@ -9,6 +9,7 @@ void	error_cmd_not_found(char *err)
 		write(STDOUT_FILENO, ": No such file or directory\n", 29);
 	else
 		write(STDOUT_FILENO, ": command not found\n", 21);
+	// printf("in error_cmd_not_found %d\n", g_exit);
 }
 
 void	error_open_file(int nbr, char *err)

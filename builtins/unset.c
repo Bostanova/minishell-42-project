@@ -6,7 +6,7 @@
 /*   By: eerika <eerika@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 18:50:28 by eerika            #+#    #+#             */
-/*   Updated: 2021/10/08 11:34:29 by eerika           ###   ########.fr       */
+/*   Updated: 2021/10/11 12:07:20 by eerika           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,19 @@ void	create_new_env(char ***env, int len, int skip)
 	int		g;
 	int		j;
 
-	res = (char **)malloc(sizeof(char *) * len);
-	res[len - 1] = NULL;
+	res = (char **)malloc(sizeof(char *) * (len));
 	g = 0;
 	j = 0;
-	while ((*env)[g])
+	while ((*env)[g] && j < len)
 	{
-		if (g == skip)
-			g++;
+		if (g == skip && g++)
+			continue ;
 		if ((*env)[g])
 			res[j] = ft_strdup((*env)[g]);
 		g++;
 		j++;
 	}
+	res[j] = NULL;
 	free_env(env);
 	*env = res;
 }
@@ -44,10 +44,10 @@ void	del_env(char ***env, char *str)
 	h = 0;
 	index = 0;
 	tmp = ft_strdup(str);
-	tmp = ft_join(tmp, "=");
 	while ((*env)[h])
 	{
-		if (!(ft_strncmp((*env)[h], tmp, ft_strlen(tmp))))
+		if (!(ft_strncmp((*env)[h], tmp, ft_strlen(tmp))) 
+		&& ((*env)[h][ft_strlen(tmp)] == '=' || (*env)[h][ft_strlen(tmp)] == '\0'))
 			index = h;
 		h++;
 	}

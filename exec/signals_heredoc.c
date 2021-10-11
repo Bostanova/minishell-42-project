@@ -3,8 +3,8 @@
 static void	sigint_heredoc(int sig)
 {
 	write(0, "\b\b  \b\b", 6);
-	g_exit = 1;
-	exit(1);
+	g_exit = 130;
+	exit(130);
 }
 
 static void	sigquit_heredoc(int sig)

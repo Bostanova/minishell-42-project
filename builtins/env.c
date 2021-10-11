@@ -6,7 +6,7 @@
 /*   By: eerika <eerika@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 18:45:45 by eerika            #+#    #+#             */
-/*   Updated: 2021/10/08 11:34:06 by eerika           ###   ########.fr       */
+/*   Updated: 2021/10/09 16:46:13 by eerika           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ void	env_cmd(t_cmds *cmd)
 	else {
 		while (cmd->env[i])
 		{
-			write(STDOUT_FILENO, cmd->env[i], ft_strlen(cmd->env[i]) + 1);
-			write(STDOUT_FILENO, "\n", 1);
+			if (ft_strchr(cmd->env[i], '='))
+				printf("%s\n", cmd->env[i]);
 			i++;
 		}
 		g_exit = 0;	

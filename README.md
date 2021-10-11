@@ -10,9 +10,4 @@ Fix it:
 
 unset ""
 
-env | grep HOME
-
-ctrl+c - убрать ^C
-ctrl+\ - убрать ^\
-
 параллельное выполнение
