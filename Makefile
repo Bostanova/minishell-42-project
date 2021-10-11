@@ -18,7 +18,7 @@ VPATH				=	$(SRCS_DIRS)
 SRCS_DIRS			=	builtins/	exec/	parsing/
 SRCS				:= 	minishell.c	\
 						cd.c	echo.c	env.c	exit.c	export.c	pwd.c	unset.c	\
-						buildins.c	find_path_to_binary.c	signals_heredoc.c	error_exec.c	in_out.c	exec.c	signals.c	\
+						buildins.c	find_path_to_binary.c	signals_heredoc.c	error_exec.c	in_out.c	exec.c	signals.c	exec_cmd.c\
 						error_pars.c	parse_env.c	parse_redirect.c	utils0.c	parse_cmd.c	parse_quotes.c	parsing.c	utils1.c
 
 OBJS_DIR			:=	.objs/
@@ -38,6 +38,8 @@ $(OBJS_DIR):
 
 clean:
 					$(RM) $(OBJS_DIR)
+					make clean -C $(LIBFT_DIR)
+					
 
 fclean:				clean
 					$(RM) $(NAME)

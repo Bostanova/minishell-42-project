@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   error_exec.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eerika <eerika@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/11 17:24:43 by eerika            #+#    #+#             */
+/*   Updated: 2021/10/11 17:25:09 by eerika           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/minishell.h"
 
 void	error_cmd_not_found(char *err)
@@ -9,7 +21,6 @@ void	error_cmd_not_found(char *err)
 		write(STDOUT_FILENO, ": No such file or directory\n", 29);
 	else
 		write(STDOUT_FILENO, ": command not found\n", 21);
-	// printf("in error_cmd_not_found %d\n", g_exit);
 }
 
 void	error_open_file(int nbr, char *err)
@@ -21,7 +32,7 @@ void	error_open_file(int nbr, char *err)
 static void	error_errno(void)
 {
 	char	*err;
-	
+
 	err = strerror(errno);
 	ft_putstr_fd("minishell: ", STDERR_FILENO);
 	ft_putendl_fd(err, STDERR_FILENO);

@@ -6,7 +6,7 @@
 /*   By: eerika <eerika@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 16:03:26 by eerika            #+#    #+#             */
-/*   Updated: 2021/10/11 16:03:27 by eerika           ###   ########.fr       */
+/*   Updated: 2021/10/11 17:13:51 by eerika           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static void	sigint(int sig)
 {
+	(void)sig;
 	rl_on_new_line();
 	rl_redisplay();
 	write(1, "  \n", 3);
@@ -25,6 +26,7 @@ static void	sigint(int sig)
 
 static void	sigquit(int sig)
 {
+	(void)sig;
 	rl_on_new_line();
 	rl_redisplay();
 	write(1, "  \b\b", 4);

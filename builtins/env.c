@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eerika <eerika@student.42.fr>              +#+  +:+       +#+        */
+/*   By: feschall <feschall@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 18:45:45 by eerika            #+#    #+#             */
-/*   Updated: 2021/10/11 16:40:29 by eerika           ###   ########.fr       */
+/*   Updated: 2021/10/11 16:27:00 by feschall         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	env_cmd(t_cmds *cmd)
 {
 	int	i;
 
-	i = 0;
+	i = -1;
 	if (cmd->args[1])
 	{
 		g_exit = 127;
@@ -26,12 +26,9 @@ void	env_cmd(t_cmds *cmd)
 	}
 	else
 	{
-		while (cmd->env[i])
-		{
+		while (cmd->env[++i])
 			if (ft_strchr(cmd->env[i], '='))
 				printf("%s\n", cmd->env[i]);
-			i++;
-		}
 		g_exit = 0;
 	}
 }

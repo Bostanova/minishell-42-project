@@ -6,7 +6,7 @@
 /*   By: eerika <eerika@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 15:58:22 by eerika            #+#    #+#             */
-/*   Updated: 2021/10/11 15:58:23 by eerika           ###   ########.fr       */
+/*   Updated: 2021/10/11 17:01:21 by eerika           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static void	sigint_heredoc(int sig)
 {
+	(void)sig;
 	write(0, "\b\b  \b\b", 6);
 	g_exit = 130;
 	exit(130);
@@ -21,6 +22,7 @@ static void	sigint_heredoc(int sig)
 
 static void	sigquit_heredoc(int sig)
 {
+	(void)sig;
 	write(0, "\b\b  \b\b", 6);
 	g_exit = 0;
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eerika <eerika@student.42.fr>              +#+  +:+       +#+        */
+/*   By: feschall <feschall@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 18:44:36 by eerika            #+#    #+#             */
-/*   Updated: 2021/10/10 15:10:40 by eerika           ###   ########.fr       */
+/*   Updated: 2021/10/11 16:33:03 by feschall         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,7 @@ void	echo_cmd(t_cmds *cmd)
 	else
 		write(STDOUT_FILENO, "\n", 1);
 	if (cmd->args[1])
-	{
 		if (ft_strcmp(cmd->args[1], "-n"))
 			write(STDOUT_FILENO, "\n", 1);
-	}
 	g_exit = 0;
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eerika <eerika@student.42.fr>              +#+  +:+       +#+        */
+/*   By: feschall <feschall@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 18:47:11 by eerika            #+#    #+#             */
-/*   Updated: 2021/10/11 12:07:39 by eerika           ###   ########.fr       */
+/*   Updated: 2021/10/11 16:47:05 by feschall         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,9 +97,9 @@ void	change_env(char ***env, char *str)
 	size_cmp = 0;
 	while (str[size_cmp] && str[size_cmp] != '=')
 		size_cmp++;
-	i = 0;
+	i = -1;
 	sign = 0;
-	while ((*env)[i])
+	while ((*env)[++i])
 	{
 		if (!(ft_strncmp((*env)[i], str, size_cmp + 1)))
 		{
@@ -108,7 +108,6 @@ void	change_env(char ***env, char *str)
 			(*env)[i] = tmp;
 			sign = 1;
 		}
-		i++;
 	}
 	if (sign == 0)
 		add_env(env, str, i + 1);
@@ -118,7 +117,7 @@ void	export_cmd(t_cmds *cmd, char ***env)
 {
 	int	i;
 
-	i = 1;
+	i = 0;
 	if (!cmd->args[1])
 	{
 		printing(*env);
@@ -126,7 +125,7 @@ void	export_cmd(t_cmds *cmd, char ***env)
 	}
 	else
 	{
-		while (cmd->args[i])
+		while (cmd->args[++i])
 		{
 			if (cmd->args[i][0] == '=' || ft_isdigit(cmd->args[i][0]))
 			{
@@ -138,7 +137,6 @@ void	export_cmd(t_cmds *cmd, char ***env)
 				change_env(env, cmd->args[i]);
 				g_exit = 0;
 			}
-			i++;
 		}
 	}
 }
