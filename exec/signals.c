@@ -2,11 +2,11 @@
 
 static void	sigint(int sig)
 {
-	rl_on_new_line(); // Regenerate the prompt on a newline
+	rl_on_new_line();
     rl_redisplay();
     write(1, "  \n", 3);
     rl_on_new_line();
-    rl_replace_line("", 0); // Clear the previous text
+    rl_replace_line("", 0);
     rl_redisplay();
     g_exit = 1;
 }
@@ -21,15 +21,14 @@ static void	sigquit(int sig)
 
 void	handle_signals(void)
 {
-	signal(SIGQUIT, sigquit); 	/* ctrl-\ do nothing	*/
-	signal(SIGINT, sigint); 	/* ctrl-C print a new prompt on a newline	*/
+	signal(SIGQUIT, sigquit);
+	signal(SIGINT, sigint);
 }
 
 void	ignore_signals(void)
 {
 	signal(SIGINT, SIG_IGN);
 	signal(SIGQUIT, SIG_IGN);
-	// signal(SIGTERM, SIG_IGN);
 }
 
 void	child_signals(int status)
