@@ -6,7 +6,7 @@
 /*   By: eerika <eerika@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 18:45:45 by eerika            #+#    #+#             */
-/*   Updated: 2021/10/09 16:46:13 by eerika           ###   ########.fr       */
+/*   Updated: 2021/10/11 16:40:29 by eerika           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,14 @@ void	env_cmd(t_cmds *cmd)
 		write(1, cmd->args[1], ft_strlen(cmd->args[1]));
 		write(1, ": No such file or directory", 28);
 	}
-	else {
+	else
+	{
 		while (cmd->env[i])
 		{
 			if (ft_strchr(cmd->env[i], '='))
 				printf("%s\n", cmd->env[i]);
 			i++;
 		}
-		g_exit = 0;	
+		g_exit = 0;
 	}
 }

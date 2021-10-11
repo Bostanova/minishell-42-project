@@ -6,7 +6,7 @@
 /*   By: eerika <eerika@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 18:50:28 by eerika            #+#    #+#             */
-/*   Updated: 2021/10/11 12:07:20 by eerika           ###   ########.fr       */
+/*   Updated: 2021/10/11 16:41:10 by eerika           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,9 @@ void	del_env(char ***env, char *str)
 	tmp = ft_strdup(str);
 	while ((*env)[h])
 	{
-		if (!(ft_strncmp((*env)[h], tmp, ft_strlen(tmp))) 
-		&& ((*env)[h][ft_strlen(tmp)] == '=' || (*env)[h][ft_strlen(tmp)] == '\0'))
+		if (!(ft_strncmp((*env)[h], tmp, ft_strlen(tmp)))
+		&& ((*env)[h][ft_strlen(tmp)] == '='
+		|| (*env)[h][ft_strlen(tmp)] == '\0'))
 			index = h;
 		h++;
 	}

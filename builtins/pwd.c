@@ -9,7 +9,7 @@ void	pwd_cmd(void)
 	{
 		printf("%s\n", current_dir);
 		free(current_dir);
-		g_exit = 0;	
+		g_exit = 0;
 	}
 	else
 	{
