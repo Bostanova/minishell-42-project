@@ -149,9 +149,9 @@ void	execution(t_cmds *cmd, char ***env){
 			if (cmd->outfile)
 				write_outfile(cmd, in_out[1], env, stdin_initial);
 			else if (cmd->outfile == NULL && cmd->next == NULL)
-				exec_last_cmd(cmd, env, stdin_initial);			//fork
+				exec_last_cmd(cmd, env, stdin_initial);	
 			else
-				exec_cmd(cmd, isbuildin, env);					//fork
+				exec_cmd(cmd, isbuildin, env);
 		}
 		if (!isbuildin)
 			foo(path, tmp);

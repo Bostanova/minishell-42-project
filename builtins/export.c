@@ -6,7 +6,7 @@
 /*   By: eerika <eerika@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 18:47:11 by eerika            #+#    #+#             */
-/*   Updated: 2021/10/09 16:47:53 by eerika           ###   ########.fr       */
+/*   Updated: 2021/10/10 15:38:08 by eerika           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ static void	printing(char **env)
 	i = -1;
 	while (sort[++i])
 	{
-		// ft_putnbr_fd(i, 1);
 		ft_putstr_fd("declare -x ", 1);
 		j = 0;
 		while (sort[i][j] && sort[i][j] != '=')

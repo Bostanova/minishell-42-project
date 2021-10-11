@@ -6,7 +6,7 @@
 /*   By: eerika <eerika@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 18:50:28 by eerika            #+#    #+#             */
-/*   Updated: 2021/10/09 16:45:20 by eerika           ###   ########.fr       */
+/*   Updated: 2021/10/10 16:39:45 by eerika           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,14 @@ void	create_new_env(char ***env, int len, int skip)
 	int		g;
 	int		j;
 
-	res = (char **)malloc(sizeof(char *) * len);
-	res[len - 1] = NULL;
+	res = (char **)malloc(sizeof(char *) * (len));
+	// res[len - 1] = NULL;
 	g = 0;
 	j = 0;
-	while ((*env)[g])
+	printf("1\n");
+	while ((*env)[g] && j < len)
 	{
+		
 		if (g == skip)
 			g++;
 		if ((*env)[g])
@@ -31,6 +33,8 @@ void	create_new_env(char ***env, int len, int skip)
 		g++;
 		j++;
 	}
+	res[j] = NULL;
+	printf("2\n");
 	free_env(env);
 	*env = res;
 }
@@ -44,13 +48,13 @@ void	del_env(char ***env, char *str)
 	h = 0;
 	index = 0;
 	tmp = ft_strdup(str);
-	// tmp = ft_join(tmp, "=");
 	while ((*env)[h])
 	{
-		if (!(ft_strncmp((*env)[h], tmp, ft_strlen(tmp))))
+		if (!(ft_strncmp((*env)[h], tmp, ft_strlen(tmp))) 
+		&& ((*env)[h][ft_strlen(tmp)] == '=' || (*env)[h][ft_strlen(tmp)] == '\0'))
 		{
 			index = h;
-			printf("%d\n", index);
+			printf("%d\n", index);		//
 		}	
 		h++;
 	}
