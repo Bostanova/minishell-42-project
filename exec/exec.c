@@ -6,7 +6,7 @@
 /*   By: eerika <eerika@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 17:25:27 by eerika            #+#    #+#             */
-/*   Updated: 2021/10/11 18:56:39 by eerika           ###   ########.fr       */
+/*   Updated: 2021/10/11 19:35:31 by eerika           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ void	execution(t_cmds *cmd, char ***env)
 	char	**path;
 	char	*tmp;
 	int		in_out[2];
-	int		isbuildin;
 	int		stdin_initial;
 	t_cmds	*head;
 
@@ -73,13 +72,12 @@ void	execution(t_cmds *cmd, char ***env)
 	stdin_initial = dup(STDIN_FILENO);
 	tmp = NULL;
 	path = NULL;
-	isbuildin = 0;
 	while (cmd != NULL)
 	{
 		if (cmd->args[0])
 		{
-			isbuildin = check_buildin(cmd->args[0]);
-			if (!isbuildin && (access(cmd->args[0], X_OK)))
+			cmd->isbuildin = check_buildin(cmd->args[0]);
+			if (!cmd->isbuildin && (access(cmd->args[0], X_OK)))
 			{
 				path = get_path(*env);
 				if (!path)
@@ -92,8 +90,7 @@ void	execution(t_cmds *cmd, char ***env)
 				cmd->args[0] = test_path(path, cmd->args[0]);
 			}
 		}
-		open_files(cmd, &in_out[0], &in_out[1]);
-		if (isbuildin)
+		if (cmd->isbuildin)
 			exec_buildins(cmd, in_out[1], env, stdin_initial);
 		else
 		{
@@ -102,10 +99,11 @@ void	execution(t_cmds *cmd, char ***env)
 			else if (cmd->outfile == NULL && cmd->next == NULL)
 				exec_last_cmd(cmd, stdin_initial);
 			else
-				exec_cmd(cmd, isbuildin, env);
+				exec_cmd(cmd, cmd->isbuildin, env);
 		}
-		if (!isbuildin)
+		if (!cmd->isbuildin)
 			free_mem(path, tmp);
+		open_files(cmd, &in_out[0], &in_out[1]);
 		cmd = cmd->next;
 	}
 	sig_proc(head);
