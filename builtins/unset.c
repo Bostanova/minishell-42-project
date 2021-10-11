@@ -6,7 +6,7 @@
 /*   By: eerika <eerika@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 18:50:28 by eerika            #+#    #+#             */
-/*   Updated: 2021/10/10 16:39:45 by eerika           ###   ########.fr       */
+/*   Updated: 2021/10/11 12:07:20 by eerika           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,22 +19,18 @@ void	create_new_env(char ***env, int len, int skip)
 	int		j;
 
 	res = (char **)malloc(sizeof(char *) * (len));
-	// res[len - 1] = NULL;
 	g = 0;
 	j = 0;
-	printf("1\n");
 	while ((*env)[g] && j < len)
 	{
-		
-		if (g == skip)
-			g++;
+		if (g == skip && g++)
+			continue ;
 		if ((*env)[g])
 			res[j] = ft_strdup((*env)[g]);
 		g++;
 		j++;
 	}
 	res[j] = NULL;
-	printf("2\n");
 	free_env(env);
 	*env = res;
 }
@@ -52,10 +48,7 @@ void	del_env(char ***env, char *str)
 	{
 		if (!(ft_strncmp((*env)[h], tmp, ft_strlen(tmp))) 
 		&& ((*env)[h][ft_strlen(tmp)] == '=' || (*env)[h][ft_strlen(tmp)] == '\0'))
-		{
 			index = h;
-			printf("%d\n", index);		//
-		}	
 		h++;
 	}
 	free(tmp);
