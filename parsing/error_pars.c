@@ -6,7 +6,7 @@
 /*   By: eerika <eerika@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 18:30:32 by eerika            #+#    #+#             */
-/*   Updated: 2021/10/09 11:43:32 by eerika           ###   ########.fr       */
+/*   Updated: 2021/10/11 15:37:19 by eerika           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void	error_unset(int nbr, char *err)
 	write(STDOUT_FILENO, "minishell: unset: ", 19);
 	write(STDOUT_FILENO, err, ft_strlen(err) + 1);
 	write(STDOUT_FILENO, ": not a valid identifier\n", 26);
-
 }
 
 void	error_exit(int nbr, char *err)

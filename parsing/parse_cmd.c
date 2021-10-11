@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: eerika <eerika@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/04 18:19:14 by eerika            #+#    #+#             */
-/*   Updated: 2021/10/08 11:35:13 by eerika           ###   ########.fr       */
+/*   Created: 2021/10/11 15:49:07 by eerika            #+#    #+#             */
+/*   Updated: 2021/10/11 15:49:15 by eerika           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,13 @@ char	*add_char(char *str, char c)
 		ft_error(1);
 	j = 0;
 	if (str)
-		while(str[j]) {
+	{
+		while (str[j])
+		{
 			res[j] = str[j];
 			j++;
 		}
+	}
 	res[j] = c;
 	res[j + 1] = '\0';
 	if (str)
@@ -67,8 +70,8 @@ char	*add_char(char *str, char c)
 
 static int	isinterpret(char c)
 {
-	if (c == '\'' || c == '\"' || c == '<' \
-		|| c == '>' || c == '$' || c == '|' \
+	if (c == '\'' || c == '\"' || c == '<'
+		|| c == '>' || c == '$' || c == '|'
 		|| ft_isspace(c))
 		return (1);
 	else
@@ -77,10 +80,10 @@ static int	isinterpret(char c)
 
 void	parse_cmd(t_cmds *cmd, char *line, int *i)
 {
-	while(!isinterpret(line[*i]) && line[*i])
+	while (!isinterpret(line[*i]) && line[*i])
 	{
-		cmd->args[cmd->count_args] = add_char(cmd->args[cmd->count_args], line[*i]);
+		cmd->args[cmd->count_args]
+			= add_char(cmd->args[cmd->count_args], line[*i]);
 		*i += 1;
 	}
 }
- 

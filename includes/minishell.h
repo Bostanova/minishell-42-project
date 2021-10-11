@@ -6,7 +6,7 @@
 /*   By: eerika <eerika@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 19:22:29 by eerika            #+#    #+#             */
-/*   Updated: 2021/10/10 14:46:01 by eerika           ###   ########.fr       */
+/*   Updated: 2021/10/11 15:53:24 by eerika           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,10 +90,7 @@ void	error(int error);
 void	handle_signals(void);
 void	ignore_signals(void);
 void	child_signals(int status);
-void 	rl_replace_line();
+void	rl_replace_line(char *str, int nbr);
 void	handle_signals_heredoc(void);
-
-void print_arr(char **arr); //remove later,  it's for checking
-void print_cmd(t_cmds *cmd);
 
 #endif
