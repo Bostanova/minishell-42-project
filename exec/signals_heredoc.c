@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   signals_heredoc.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eerika <eerika@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/11 15:58:22 by eerika            #+#    #+#             */
+/*   Updated: 2021/10/11 15:58:23 by eerika           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/minishell.h"
 
 static void	sigint_heredoc(int sig)
@@ -15,6 +27,6 @@ static void	sigquit_heredoc(int sig)
 
 void	handle_signals_heredoc(void)
 {
-	signal(SIGQUIT, sigquit_heredoc); 	/* ctrl-\ do nothing	*/
-	signal(SIGINT, sigint_heredoc); 	/* ctrl-C print a new prompt on a newline	*/
+	signal(SIGQUIT, sigquit_heredoc);
+	signal(SIGINT, sigint_heredoc);
 }

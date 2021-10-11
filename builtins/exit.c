@@ -6,7 +6,7 @@
 /*   By: eerika <eerika@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 18:45:51 by eerika            #+#    #+#             */
-/*   Updated: 2021/10/08 11:34:13 by eerika           ###   ########.fr       */
+/*   Updated: 2021/10/11 13:14:22 by eerika           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	exit_with_value(t_cmds *cmd)
 			error_exit(255, cmd->args[1]);
 		i++;
 	}
+	write(STDOUT_FILENO, "exit\n", 6);
 	exit(ft_atoi(cmd->args[1]) % 256);
 }
 

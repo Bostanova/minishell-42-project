@@ -25,7 +25,7 @@ OBJS_DIR			:=	.objs/
 OBJS				:=	$(addprefix $(OBJS_DIR), $(notdir $(SRCS:%.c=%.o)))
 
 all:				libft_make $(NAME)
-					./${NAME}
+
 
 $(NAME):			$(OBJS_DIR) $(OBJS) $(LIBFT) Makefile
 					$(CC) $(CFLAGS) $(RFLAGS) $(LIBFT) $(OBJS) -o $@
