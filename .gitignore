@@ -15,5 +15,10 @@ README-A.md.objs
 .objs
 libft/*.o
 libft/*.a
+<<<<<<< HEAD
 .gitpush
 Archive.zip
+=======
+Archive.zip
+.gitpush
+>>>>>>> 7647bd4f13ff9ae84dba9e8746b2ccaba4c3ed16

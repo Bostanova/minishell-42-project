@@ -6,7 +6,7 @@
 /*   By: eerika <eerika@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 17:32:33 by eerika            #+#    #+#             */
-/*   Updated: 2021/10/08 11:35:33 by eerika           ###   ########.fr       */
+/*   Updated: 2021/10/11 19:27:37 by eerika           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,9 @@ t_cmds	*init_cmd(char **env)
 	cmd->pipe = 0;
 	cmd->infile = NULL;
 	cmd->outfile = NULL;
+	cmd->isbuildin = 0;
+	cmd->stdin_initial = STDIN_FILENO;
+	cmd->stdout_initial = STDIN_FILENO;
 	cmd->next = NULL;
 	return (cmd);
 }
