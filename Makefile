@@ -56,8 +56,8 @@ gitpush:
 					git status
 					git add .
 					git status
-					echo Commit name:
-					git commit -m "$echo"
-					# git push origin ${USER}
+					@echo Enter commits name:
+					git commit -m "$@"
+# git push origin ${USER}
 
 .PHONY:				all clean fclean re libft_make
