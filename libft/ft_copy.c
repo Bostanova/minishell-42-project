@@ -1,36 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_realloc.c                                       :+:      :+:    :+:   */
+/*   ft_copy.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eerika <eerika@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/04 19:16:12 by eerika            #+#    #+#             */
-/*   Updated: 2021/10/04 19:16:16 by eerika           ###   ########.fr       */
+/*   Created: 2021/10/04 19:13:30 by eerika            #+#    #+#             */
+/*   Updated: 2021/10/04 19:20:30 by eerika           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "./libft.h"
 
-void	*ft_realloc(void *ptr, size_t size)
+char	*ft_copy(char *str, int start)
 {
 	char	*res;
-	char	*ptr_cast;
-	size_t	i;
+	int		i;
 
+	res = NULL;
 	i = 0;
-	ptr_cast = (char *)ptr;
-	res = (char *)malloc(size);
-	if (res)
+	if (str && ((int)ft_strlen(str) > start))
 	{
-		while (i < size && ptr_cast[i])
+		res = (char *)ft_calloc((ft_strlen(str) - start + 1), sizeof(char));
+		if (!res)
+			return (NULL);
+		while (str[start])
 		{
-			res[i] = ptr_cast[i];
+			res[i] = str[start];
 			i++;
+			start++;
 		}
-		free(ptr);
-		return ((void *)res);
+		res[i] = '\0';
+		free(str);
 	}
-	free (ptr);
-	return (NULL);
+	return (res);
 }

@@ -6,3 +6,14 @@ pipex_by_eerika
 Minishell.pdf
 transletions.txt
 .vscode
+minishell
+infile
+outfile
+README.md
+minishell.dSYM
+README-A.md.objs
+.objs
+libft/*.o
+libft/*.a
+Archive.zip
+.gitpush

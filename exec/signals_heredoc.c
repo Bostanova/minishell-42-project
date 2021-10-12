@@ -1,36 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_realloc.c                                       :+:      :+:    :+:   */
+/*   signals_heredoc.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eerika <eerika@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/04 19:16:12 by eerika            #+#    #+#             */
-/*   Updated: 2021/10/04 19:16:16 by eerika           ###   ########.fr       */
+/*   Created: 2021/10/11 15:58:22 by eerika            #+#    #+#             */
+/*   Updated: 2021/10/11 17:01:21 by eerika           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/minishell.h"
 
-void	*ft_realloc(void *ptr, size_t size)
+static void	sigint_heredoc(int sig)
 {
-	char	*res;
-	char	*ptr_cast;
-	size_t	i;
+	(void)sig;
+	write(0, "\b\b  \b\b", 6);
+	g_exit = 130;
+	exit(130);
+}
 
-	i = 0;
-	ptr_cast = (char *)ptr;
-	res = (char *)malloc(size);
-	if (res)
-	{
-		while (i < size && ptr_cast[i])
-		{
-			res[i] = ptr_cast[i];
-			i++;
-		}
-		free(ptr);
-		return ((void *)res);
-	}
-	free (ptr);
-	return (NULL);
+static void	sigquit_heredoc(int sig)
+{
+	(void)sig;
+	write(0, "\b\b  \b\b", 6);
+	g_exit = 0;
+}
+
+void	handle_signals_heredoc(void)
+{
+	signal(SIGQUIT, sigquit_heredoc);
+	signal(SIGINT, sigint_heredoc);
 }
