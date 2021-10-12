@@ -1,0 +1,8 @@
+#!/bin/sh
+git status
+git add .
+git status
+echo Enter commits name: 
+read commits_name
+git commit -m "$commits_name"
+git push origin ${USER}

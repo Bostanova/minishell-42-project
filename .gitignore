@@ -15,3 +15,4 @@ README-A.md.objs
 .objs
 libft/*.o
 libft/*.a
+.gitpush
