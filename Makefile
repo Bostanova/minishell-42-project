@@ -59,7 +59,7 @@ gitpush:
 					@echo Enter commits name
 					read commits_name
 					echo $(sss)
-					git commit -m $ commits_name
+					git commit -m $commits_name
 
 # git push origin ${USER}
 
