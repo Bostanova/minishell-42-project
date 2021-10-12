@@ -6,7 +6,7 @@
 /*   By: eerika <eerika@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 19:22:29 by eerika            #+#    #+#             */
-/*   Updated: 2021/10/11 15:53:24 by eerika           ###   ########.fr       */
+/*   Updated: 2021/10/11 19:27:07 by eerika           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,9 @@ typedef struct s_cmds
 	int				redir[2];
 	char			*infile;
 	char			*outfile;
+	int				isbuildin;
+	int				stdin_initial;
+	int				stdout_initial;
 	struct s_cmds	*next;
 }	t_cmds;
 
@@ -76,6 +79,9 @@ void	error_export(char *err);
 void	exit_cmd(t_cmds *cmd);
 void	error_exit(int nbr, char *err);
 void	execution(t_cmds *cmd, char ***env);
+void	exec_cmd(t_cmds *cmd, int isbuildin, char ***env);
+void	exec_last_cmd(t_cmds *cmd, int stdin_initial);
+void	write_outfile(t_cmds *cmd, int outfile_fd, int stdin_initial);
 void	error_cmd_not_found(char *err);
 void	error_open_file(int nbr, char *err);
 char	*test_path(char **path, char *cmd);

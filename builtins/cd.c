@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eerika <eerika@student.42.fr>              +#+  +:+       +#+        */
+/*   By: feschall <feschall@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 18:31:54 by eerika            #+#    #+#             */
-/*   Updated: 2021/10/08 11:33:54 by eerika           ###   ########.fr       */
+/*   Updated: 2021/10/11 16:32:09 by feschall         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,11 @@ void	free_env(char ***env)
 {
 	int	i;
 
-	i = 0;
+	i = -1;
 	if (*env)
 	{
-		while ((*env)[i])
-		{
+		while ((*env)[++i])
 			free((*env)[i]);
-			i++;
-		}
 		free(*env);
 	}
 }
@@ -36,12 +33,9 @@ static void	fill_oldpwd(char ***env, char *oldpwd, int size)
 	res = (char **)malloc(sizeof(char *) * (size + 2));
 	if (!res)
 		ft_error(1);
-	i = 0;
-	while ((*env)[i])
-	{
+	i = -1;
+	while ((*env)[++i])
 		res[i] = ft_strdup((*env)[i]);
-		i++;
-	}
 	res[i] = ft_strdup("OLDPWD=");
 	res[i] = ft_join(res[i], oldpwd);
 	res[i + 1] = NULL;
@@ -66,11 +60,10 @@ static void	change_env_pwd(char ***env, char *pwd, char *oldpwd)
 {
 	int		i;
 	int		sign;
-	char	*tmp;
 
 	sign = 0;
-	i = 0;
-	while ((*env)[i])
+	i = -1;
+	while ((*env)[++i])
 	{
 		if (!(strncmp((*env)[i], "PWD=", 4)))
 			rewrite_env(env, pwd, i, 1);
@@ -79,7 +72,6 @@ static void	change_env_pwd(char ***env, char *pwd, char *oldpwd)
 			rewrite_env(env, oldpwd, i, 0);
 			sign = 1;
 		}
-		i++;
 	}
 	if (sign == 0)
 		fill_oldpwd(env, oldpwd, i + 1);

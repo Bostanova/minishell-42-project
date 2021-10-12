@@ -5,7 +5,7 @@ RM					:= 	rm -rf
 
 RFLAGS				:=	-lreadline -L/Users/${USER}/.brew/Cellar/readline/8.1.1/lib/ -I/Users/${USER}/.brew/Cellar/readline/8.1.1/include
 OFLAGS				:=	-O2 -g #-fsanitize=address
-CFLAGS				:= 	$(OFLAGS) #-Wall -Wextra -Werror
+CFLAGS				:= 	$(OFLAGS) -Wall -Wextra -Werror
 NORM				:= 	-R CheckForbiddenSourceHeader
 
 LIBFT_DIR			:= 	libft/
@@ -18,7 +18,7 @@ VPATH				=	$(SRCS_DIRS)
 SRCS_DIRS			=	builtins/	exec/	parsing/
 SRCS				:= 	minishell.c	\
 						cd.c	echo.c	env.c	exit.c	export.c	pwd.c	unset.c	\
-						buildins.c	find_path_to_binary.c	signals_heredoc.c	error_exec.c	in_out.c	exec.c	signals.c	\
+						buildins.c	find_path_to_binary.c	signals_heredoc.c	error_exec.c	in_out.c	exec.c	signals.c	exec_cmd.c\
 						error_pars.c	parse_env.c	parse_redirect.c	utils0.c	parse_cmd.c	parse_quotes.c	parsing.c	utils1.c
 
 OBJS_DIR			:=	.objs/
@@ -38,6 +38,8 @@ $(OBJS_DIR):
 
 clean:
 					$(RM) $(OBJS_DIR)
+					make clean -C $(LIBFT_DIR)
+					
 
 fclean:				clean
 					$(RM) $(NAME)
@@ -54,7 +56,8 @@ gitpush:
 					git status
 					git add .
 					git status
-					git commit -m "New edition"
-					git push origin ${USER}
+					echo Commit name:
+					git commit -m "$echo"
+					# git push origin ${USER}
 
 .PHONY:				all clean fclean re libft_make
