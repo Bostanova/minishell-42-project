@@ -61,7 +61,7 @@ gitpush:
 					echo 'echo Enter commits name: ' >> .gitpush;		\
 					echo 'read commits_name' >> .gitpush;				\
 					echo 'git commit -m "$$commits_name"' >> .gitpush;	\
-					echo 'git push origin $${USER}' >> .gitpush;}
-# sh .gitpush;}
+					echo 'git push origin $${USER}' >> .gitpush;		\
+					sh .gitpush;}
 
 .PHONY:				all clean fclean re libft_make
