@@ -35,7 +35,6 @@ $(OBJS_DIR)%.o:		%.c $(HEADER)
 
 $(OBJS_DIR):
 					@mkdir -p $@
-
 clean:
 					$(RM) $(OBJS_DIR)
 					make clean -C $(LIBFT_DIR)
@@ -57,11 +56,11 @@ gitpush:
 					git status
 					git add .
 					git status
-					echo commit_name
-					read commit_name
+					@echo Enter commits name
+					read commits_name
+					echo $(sss)
+					git commit -m $ commits_name
 
-					@echo Enter commits name:
-					git commit -m "$commit_name"
 # git push origin ${USER}
 
 .PHONY:				all clean fclean re libft_make
