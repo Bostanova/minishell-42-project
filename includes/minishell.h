@@ -6,7 +6,7 @@
 /*   By: eerika <eerika@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 19:22:29 by eerika            #+#    #+#             */
-/*   Updated: 2021/10/11 17:49:09 by eerika           ###   ########.fr       */
+/*   Updated: 2021/10/12 13:48:34 by eerika           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,5 +95,6 @@ void	ignore_signals(void);
 void	child_signals(int status);
 void	rl_replace_line(char *str, int nbr);
 void	handle_signals_heredoc(void);
+void	free_mem(char **arr, char *str);
 
 #endif

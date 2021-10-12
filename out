@@ -1,0 +1,11 @@
+Makefile
+README.md
+builtins
+exec
+includes
+libft
+minishell
+minishell.c
+minishell.dSYM
+out
+parsing
