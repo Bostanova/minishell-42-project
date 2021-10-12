@@ -60,7 +60,7 @@ gitpush:
 					echo 'git status' >> .gitpush;						\
 					echo 'echo Enter commits name: ' >> .gitpush;		\
 					echo 'read commits_name' >> .gitpush;				\
-					echo 'git commit -m $$commits_name' >> .gitpush;	\
+					echo 'git commit -m "$$commits_name"' >> .gitpush;	\
 					echo 'git push origin $${USER}' >> .gitpush;}
 # sh .gitpush;}
 
