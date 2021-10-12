@@ -53,14 +53,12 @@ norme:
 					norminette $(NORM) $(SRCS)*.c $(INCLUDES)*.h
 
 gitpush:
-					git status
-					git add .
-					git status
-					@echo Enter commits name
-					read commits_name
-					echo $(sss)
-					git commit -m $commits_name
-
+					sh .sh
+# git status
+# git add .
+# git status
+# @echo Enter commits name:
+# git commit -m 
 # git push origin ${USER}
 
 .PHONY:				all clean fclean re libft_make
