@@ -53,12 +53,24 @@ norme:
 					norminette $(NORM) $(SRCS)*.c $(INCLUDES)*.h
 
 gitpush:
-					sh .sh
-# git status
-# git add .
-# git status
-# @echo Enter commits name:
-# git commit -m 
-# git push origin ${USER}
+					sh .gitpush || { echo "#!/bin/sh" > .gitpush;					\
+									echo "@read commits_name" >> .gitpush;			\
+									echo "git status" >> .gitpush;					\
+									echo "git add ." >> .gitpush;					\
+									echo "git status" >> .gitpush;					\
+									echo "@echo Enter commits name: " >> .gitpush;	\
+									echo "git commit -m $commits_name" >> .gitpush;	\
+									sh .gitpush;}
+# echo # git push origin ${USER} >> .gitpush;}
 
 .PHONY:				all clean fclean re libft_make
+
+
+# #!/bin/sh
+# echo read commits_name >> .gitpush
+# echo git status >> .gitpush
+# echo git add .>> .gitpush
+# echo git status >> .gitpush
+# echo @echo Enter commits name: >> .gitpush
+# echo git commit -m $commits_name >> .gitpush
+# echo # git push origin ${USER} >> .gitpush

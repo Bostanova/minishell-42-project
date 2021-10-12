@@ -1,0 +1,7 @@
+#!/bin/sh
+@read commits_name
+git status
+git add .
+git status
+@echo Enter commits name: 
+git commit -m ommits_name
