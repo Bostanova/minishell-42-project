@@ -52,12 +52,16 @@ libft_make:
 
 norme:
 					norminette $(NORM) $(SRCS)*.c $(INCLUDES)*.h
+
 gitpush:
 					git status
 					git add .
 					git status
+					echo commit_name
+					read commit_name
+
 					@echo Enter commits name:
-					git commit -m "$@"
+					git commit -m "$commit_name"
 # git push origin ${USER}
 
 .PHONY:				all clean fclean re libft_make
