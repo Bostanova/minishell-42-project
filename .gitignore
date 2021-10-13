@@ -1,18 +1,7 @@
-.vscode
-Minishell Tests.ods
-minishell.dSYM
-test.txt
-pipex_by_eerika
 .DS_Store
-Minishell.pdf
-transletions.txt
 .objs
-minishell
 libft/*.o
 libft/*.a
-1sig.c
-2sig.c
-redirect.c
-signal.c
-utils_5.c
 .gitpush
+.vscode
+minishell
