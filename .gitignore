@@ -1,7 +1,6 @@
 Minishell Tests.ods
 minishell.dSYM
 test.txt
-pipex_by_eerika
 .DS_Store
 Minishell.pdf
 transletions.txt
@@ -9,16 +8,10 @@ transletions.txt
 minishell
 infile
 outfile
-README.md
 minishell.dSYM
 README-A.md.objs
 .objs
 libft/*.o
 libft/*.a
-<<<<<<< HEAD
-.gitpush
-Archive.zip
-=======
 Archive.zip
 .gitpush
->>>>>>> 7647bd4f13ff9ae84dba9e8746b2ccaba4c3ed16
