@@ -6,11 +6,19 @@
 /*   By: eerika <eerika@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 17:24:32 by eerika            #+#    #+#             */
-/*   Updated: 2021/10/11 17:24:33 by eerika           ###   ########.fr       */
+/*   Updated: 2021/10/12 13:48:45 by eerika           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+void	free_mem(char **arr, char *str)
+{
+	if (arr)
+		free_arr(arr);
+	if (str)
+		free(str);
+}
 
 int	check_buildin(char *cmd)
 {
